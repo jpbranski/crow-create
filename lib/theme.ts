@@ -117,6 +117,38 @@ const lightThemeOptions: ThemeOptions = {
         variant: 'outlined',
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: ({ theme }) => ({
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#1A1C1F" : "#F5F5F5",
+          color:
+            theme.palette.mode === "dark" ? "#FFFFFF" : "#111111",
+          fontSize: "0.875rem",
+          fontWeight: 500,
+          padding: "10px 12px",
+          borderRadius: 8,
+          boxShadow:
+            theme.palette.mode === "dark"
+              ? "0 4px 12px rgba(0,0,0,0.6)"
+              : "0 4px 10px rgba(0,0,0,0.15)",
+          maxWidth: 300,
+          lineHeight: 1.4,
+        }),
+        arrow: ({ theme }) => ({
+          color:
+            theme.palette.mode === "dark" ? "#1A1C1F" : "#F5F5F5",
+        }),
+      },
+      defaultProps: {
+        arrow: true,
+        enterTouchDelay: 0,
+        enterDelay: 200,
+        leaveDelay: 100,
+        disableInteractive: false,
+      },
+    }
+
   },
 }
 
@@ -178,6 +210,37 @@ const darkThemeOptions: ThemeOptions = {
     MuiTextField: {
       defaultProps: {
         variant: 'outlined',
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: ({ theme }) => ({
+          backgroundColor:
+            theme.palette.mode === "dark" ? "#1A1C1F" : "#F5F5F5",
+          color:
+            theme.palette.mode === "dark" ? "#FFFFFF" : "#111111",
+          fontSize: "0.875rem",
+          fontWeight: 500,
+          padding: "10px 12px",
+          borderRadius: 8,
+          boxShadow:
+            theme.palette.mode === "dark"
+              ? "0 4px 12px rgba(0,0,0,0.6)"
+              : "0 4px 10px rgba(0,0,0,0.15)",
+          maxWidth: 300,
+          lineHeight: 1.4,
+        }),
+        arrow: ({ theme }) => ({
+          color:
+            theme.palette.mode === "dark" ? "#1A1C1F" : "#F5F5F5",
+        }),
+      },
+      defaultProps: {
+        arrow: true,
+        enterTouchDelay: 0,
+        enterDelay: 200,
+        leaveDelay: 100,
+        disableInteractive: false,
       },
     },
   },
