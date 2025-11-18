@@ -46,7 +46,7 @@ export default function Footer() {
               underline="hover"
               variant="body2"
             >
-              Privacy
+              Privacy Policy
             </MuiLink>
             <MuiLink
               component={Link}
@@ -55,7 +55,7 @@ export default function Footer() {
               underline="hover"
               variant="body2"
             >
-              Terms
+              Terms of Service
             </MuiLink>
             <MuiLink
               component={Link}
@@ -64,7 +64,7 @@ export default function Footer() {
               underline="hover"
               variant="body2"
             >
-              Accessibility
+              Accessibility Statement
             </MuiLink>
             <MuiLink
               component={Link}
@@ -74,6 +74,18 @@ export default function Footer() {
               variant="body2"
             >
               Cookies
+            </MuiLink>
+            <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', sm: 'block' } }} />
+            <MuiLink
+              href="https://jpbranski.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="primary.main"
+              underline="hover"
+              variant="body2"
+              sx={{ fontWeight: 600 }}
+            >
+              jpbranski.com
             </MuiLink>
           </Box>
         </Box>

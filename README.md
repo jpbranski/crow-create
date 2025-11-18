@@ -77,7 +77,12 @@ crow-create/
 ├── app/
 │   ├── (site)/
 │   │   ├── layout.tsx          # Main site layout
-│   │   ├── page.tsx            # Playground page
+│   │   ├── page.tsx            # Home page
+│   │   ├── create/             # Create tool page
+│   │   ├── themes/             # Theme library
+│   │   ├── compare/            # Theme comparison
+│   │   ├── resources/          # Resources page
+│   │   ├── docs/               # Documentation
 │   │   └── legal/              # Legal pages
 │   │       ├── privacy/
 │   │       ├── terms/
@@ -86,7 +91,7 @@ crow-create/
 │   ├── layout.tsx              # Root layout
 │   └── globals.css             # Global styles
 ├── components/
-│   ├── playground/
+│   ├── create/
 │   │   ├── PaletteSection.tsx
 │   │   ├── TypographySection.tsx
 │   │   ├── LayoutSection.tsx
@@ -132,7 +137,7 @@ crow-create/
 - Logo color extraction from images
 - Palette generation helpers
 
-### Playground Sections (`components/playground/`)
+### Create Sections (`components/create/`)
 - **PaletteSection**: Color configuration and WCAG checking
 - **TypographySection**: Font selection and scale configuration
 - **LayoutSection**: Spacing, radius, shadows, and motion

@@ -18,11 +18,11 @@ import {
   Visibility,
   Code,
 } from '@mui/icons-material'
-import PaletteSection from '@/components/playground/PaletteSection'
-import TypographySection from '@/components/playground/TypographySection'
-import LayoutSection from '@/components/playground/LayoutSection'
-import PreviewSection from '@/components/playground/PreviewSection'
-import ExportsSection from '@/components/playground/ExportsSection'
+import PaletteSection from '@/components/create/PaletteSection'
+import TypographySection from '@/components/create/TypographySection'
+import LayoutSection from '@/components/create/LayoutSection'
+import PreviewSection from '@/components/create/PreviewSection'
+import ExportsSection from '@/components/create/ExportsSection'
 import ProjectManager from '@/components/ProjectManager'
 
 interface TabPanelProps {

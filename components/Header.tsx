@@ -70,8 +70,14 @@ export default function Header() {
             <Button component={Link} href="/create" color="inherit">
               Create
             </Button>
+            <Button component={Link} href="/themes" color="inherit">
+              Themes
+            </Button>
             <Button component={Link} href="/docs" color="inherit">
               Docs
+            </Button>
+            <Button component={Link} href="/resources" color="inherit">
+              Resources
             </Button>
           </Box>
         )}
@@ -109,12 +115,26 @@ export default function Header() {
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
+              <ListItemButton component={Link} href="/themes" onClick={() => setMobileMenuOpen(false)}>
+                <ListItemText primary="Themes" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
               <ListItemButton
                 component={Link}
                 href="/docs"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <ListItemText primary="Docs" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                href="/resources"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <ListItemText primary="Resources" />
               </ListItemButton>
             </ListItem>
           </List>
