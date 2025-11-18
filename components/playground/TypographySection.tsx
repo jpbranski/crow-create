@@ -76,8 +76,8 @@ export default function TypographySection() {
       <Grid container spacing={3}>
         {/* Font Selection */}
         <Grid item xs={12} md={6}>
-          <Paper variant="outlined" sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>
+          <Paper variant="outlined" sx={{ p: 3 }}>
+            <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
               Font Selection
             </Typography>
 
@@ -117,11 +117,11 @@ export default function TypographySection() {
 
             {suggestedHeadingFonts.length > 0 && (
               <Box>
-                <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+                <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 1 }}>
                   <AutoAwesome sx={{ fontSize: 14, mr: 0.5, verticalAlign: 'middle' }} />
                   Suggested heading fonts for {config.typography.bodyFont}
                 </Typography>
-                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
+                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                   {suggestedHeadingFonts.map((font) => (
                     <Chip
                       key={font}
@@ -139,13 +139,13 @@ export default function TypographySection() {
 
         {/* Typography Scale */}
         <Grid item xs={12} md={6}>
-          <Paper variant="outlined" sx={{ p: 2 }}>
-            <Typography variant="h6" gutterBottom>
+          <Paper variant="outlined" sx={{ p: 3 }}>
+            <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
               Typography Scale
             </Typography>
 
-            <Box sx={{ mb: 3 }}>
-              <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+            <Box sx={{ mb: 4 }}>
+              <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 2 }}>
                 Base Font Size: {config.typography.baseFontSize}px
               </Typography>
               <Slider
@@ -159,11 +159,11 @@ export default function TypographySection() {
               />
             </Box>
 
-            <Box>
-              <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+            <Box sx={{ pb: 2 }}>
+              <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 2 }}>
                 Scale Ratio: {config.typography.scale.toFixed(2)}
               </Typography>
-              <Box sx={{ px: 1 }}>
+              <Box sx={{ px: 2, pb: 3 }}>
                 <Slider
                   value={config.typography.scale}
                   onChange={(_e, value) => updateTypography({ scale: value as number })}
@@ -171,10 +171,10 @@ export default function TypographySection() {
                   max={1.5}
                   step={0.025}
                   marks={[
-                    { value: 1.125, label: <span style={{ fontSize: '0.65rem' }}>Minor 2nd</span> },
-                    { value: 1.25, label: <span style={{ fontSize: '0.65rem' }}>Major 3rd</span> },
-                    { value: 1.333, label: <span style={{ fontSize: '0.65rem' }}>Perfect 4th</span> },
-                    { value: 1.5, label: <span style={{ fontSize: '0.65rem' }}>Perfect 5th</span> },
+                    { value: 1.125, label: <span style={{ fontSize: '0.65rem', whiteSpace: 'nowrap' }}>Minor 2nd</span> },
+                    { value: 1.25, label: <span style={{ fontSize: '0.65rem', whiteSpace: 'nowrap' }}>Major 3rd</span> },
+                    { value: 1.333, label: <span style={{ fontSize: '0.65rem', whiteSpace: 'nowrap' }}>Perfect 4th</span> },
+                    { value: 1.5, label: <span style={{ fontSize: '0.65rem', whiteSpace: 'nowrap' }}>Perfect 5th</span> },
                   ]}
                   valueLabelDisplay="auto"
                   valueLabelFormat={(v) => v.toFixed(2)}
@@ -182,6 +182,7 @@ export default function TypographySection() {
                     '& .MuiSlider-markLabel': {
                       fontSize: '0.65rem',
                       whiteSpace: 'nowrap',
+                      overflow: 'visible',
                     },
                   }}
                 />

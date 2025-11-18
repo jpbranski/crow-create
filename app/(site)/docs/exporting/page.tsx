@@ -148,7 +148,7 @@ export default function ExportingPage() {
         Integration Examples
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'grey.50' }}>
+      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Material-UI Integration
         </Typography>
@@ -176,7 +176,7 @@ function App() {
         </Typography>
       </Paper>
 
-      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'grey.50' }}>
+      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           CSS Variables Integration
         </Typography>

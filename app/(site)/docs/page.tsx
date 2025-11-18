@@ -182,7 +182,7 @@ export default function GettingStartedPage() {
         </Box>
       </Box>
 
-      <Box sx={{ mt: 4, p: 3, bgcolor: 'grey.50', borderRadius: 2, border: 1, borderColor: 'divider' }}>
+      <Box sx={{ mt: 4, p: 3, bgcolor: 'background.paper', borderRadius: 2, border: 1, borderColor: 'divider' }}>
         <Typography variant="h5" gutterBottom fontWeight={600}>
           Key Features
         </Typography>

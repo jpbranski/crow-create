@@ -98,7 +98,7 @@ export default function TypographyPage() {
         Create uses a modular scale system with two key parameters:
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'grey.50' }}>
+      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Base Font Size
         </Typography>
@@ -111,7 +111,7 @@ export default function TypographyPage() {
         </Typography>
       </Paper>
 
-      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'grey.50' }}>
+      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Scale Ratio
         </Typography>

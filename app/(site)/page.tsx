@@ -9,6 +9,9 @@ import {
   Card,
   CardContent,
   useTheme,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material'
 import {
   Palette as PaletteIcon,
@@ -17,6 +20,7 @@ import {
   Settings,
   Speed,
   Security,
+  ExpandMore,
 } from '@mui/icons-material'
 import Link from 'next/link'
 
@@ -187,6 +191,63 @@ export default function AboutPage() {
                 </g>
               </svg>
             </Box>
+          </Box>
+
+          {/* How It Works Accordion */}
+          <Box sx={{ mt: 6 }}>
+            <Accordion
+              sx={{
+                bgcolor: 'background.paper',
+                borderRadius: 2,
+                '&:before': { display: 'none' },
+                boxShadow: theme.shadows[2],
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                aria-controls="how-it-works-content"
+                id="how-it-works-header"
+              >
+                <Typography variant="h6" fontWeight={600}>
+                  How Crow Create Works
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography variant="body1" paragraph>
+                  Crow Create is a comprehensive design system builder that runs entirely in your browser.
+                  No backend, no accounts, no data sent to servers.
+                </Typography>
+                <Typography variant="body2" component="div" color="text.secondary">
+                  <Box component="ol" sx={{ pl: 2 }}>
+                    <li>
+                      <strong>Build Your Palette:</strong> Start by defining your brand colors. Extract them from
+                      your logo, generate random palettes, or create from scratch. The tool automatically generates
+                      light and dark variants.
+                    </li>
+                    <li>
+                      <strong>Check Accessibility:</strong> Use the built-in WCAG contrast checker to ensure your
+                      color combinations meet AA or AAA standards for text readability.
+                    </li>
+                    <li>
+                      <strong>Configure Typography:</strong> Select fonts, define type scales, and get intelligent
+                      pairing suggestions between heading and body fonts.
+                    </li>
+                    <li>
+                      <strong>Define Layout Tokens:</strong> Set spacing scales, border radius, shadow systems, and
+                      animation timings that match your brand.
+                    </li>
+                    <li>
+                      <strong>Preview Components:</strong> See how your design system looks with real UI components
+                      like buttons, cards, forms, and alerts.
+                    </li>
+                    <li>
+                      <strong>Export & Share:</strong> Generate production-ready code for Material-UI, Tailwind CSS,
+                      CSS variables, or JSON tokens. Share via URL with teammates.
+                    </li>
+                  </Box>
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           </Box>
         </Container>
       </Box>

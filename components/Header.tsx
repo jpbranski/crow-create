@@ -13,36 +13,18 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Menu,
-  MenuItem,
   useMediaQuery,
   useTheme as useMuiTheme,
 } from '@mui/material'
-import { Menu as MenuIcon, KeyboardArrowDown } from '@mui/icons-material'
+import { Menu as MenuIcon } from '@mui/icons-material'
 import Link from 'next/link'
 import Logo from './Logo'
 import ThemeToggle from './ThemeToggle'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [legalMenuAnchor, setLegalMenuAnchor] = useState<null | HTMLElement>(null)
   const theme = useMuiTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-
-  const handleLegalMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setLegalMenuAnchor(event.currentTarget)
-  }
-
-  const handleLegalMenuClose = () => {
-    setLegalMenuAnchor(null)
-  }
-
-  const legalLinks = [
-    { text: 'Privacy Policy', href: '/legal/privacy' },
-    { text: 'Terms of Service', href: '/legal/terms' },
-    { text: 'Accessibility', href: '/legal/accessibility' },
-    { text: 'Cookies', href: '/legal/cookies' },
-  ]
 
   return (
     <AppBar
@@ -91,36 +73,6 @@ export default function Header() {
             <Button component={Link} href="/docs" color="inherit">
               Docs
             </Button>
-            <Button
-              color="inherit"
-              onClick={handleLegalMenuOpen}
-              endIcon={<KeyboardArrowDown />}
-              aria-controls={legalMenuAnchor ? 'legal-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={legalMenuAnchor ? 'true' : undefined}
-            >
-              Legal
-            </Button>
-            <Menu
-              id="legal-menu"
-              anchorEl={legalMenuAnchor}
-              open={Boolean(legalMenuAnchor)}
-              onClose={handleLegalMenuClose}
-              MenuListProps={{
-                'aria-labelledby': 'legal-button',
-              }}
-            >
-              {legalLinks.map((link) => (
-                <MenuItem
-                  key={link.href}
-                  component={Link}
-                  href={link.href}
-                  onClick={handleLegalMenuClose}
-                >
-                  {link.text}
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         )}
 
@@ -165,26 +117,6 @@ export default function Header() {
                 <ListItemText primary="Docs" />
               </ListItemButton>
             </ListItem>
-            <ListItem>
-              <ListItemText
-                primary="Legal"
-                primaryTypographyProps={{
-                  variant: 'overline',
-                  color: 'text.secondary',
-                }}
-              />
-            </ListItem>
-            {legalLinks.map((link) => (
-              <ListItem key={link.href} disablePadding sx={{ pl: 2 }}>
-                <ListItemButton
-                  component={Link}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <ListItemText primary={link.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
           </List>
         </Box>
       </Drawer>
