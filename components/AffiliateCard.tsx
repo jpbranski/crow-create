@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardContent, Typography, Button, Chip, Box } from '@mui/material'
+import { Card, CardContent, Typography, Button, Box } from '@mui/material'
 import { OpenInNew } from '@mui/icons-material'
 import { AffiliateItem } from '@/data/affiliatePool'
 
@@ -34,20 +34,6 @@ export default function AffiliateCard({ data }: AffiliateCardProps) {
           gap: 2,
         }}
       >
-        {/* Header with category chip */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Chip
-            label="Affiliate Link"
-            size="small"
-            sx={{
-              fontSize: '0.7rem',
-              height: 20,
-              bgcolor: 'action.selected',
-              color: 'text.secondary',
-            }}
-          />
-        </Box>
-
         {/* Icon circle */}
         {data.icon && (
           <Box
