@@ -288,3 +288,47 @@ export function generateSemanticColors(primary: string): {
     info: primary,
   }
 }
+
+/**
+ * Generate a random aesthetically pleasing color palette
+ * Ensures good contrast and avoids extreme neon colors
+ */
+export function generateRandomPalette(): {
+  primary: string
+  secondary: string
+} {
+  // Generate primary color with reasonable saturation and lightness
+  const primaryHue = Math.floor(Math.random() * 360)
+  const primarySat = 50 + Math.floor(Math.random() * 30) // 50-80%
+  const primaryLight = 40 + Math.floor(Math.random() * 20) // 40-60%
+
+  const primaryRgb = hslToRgb(primaryHue, primarySat, primaryLight)
+  const primary = rgbToHex(primaryRgb.r, primaryRgb.g, primaryRgb.b)
+
+  // Generate secondary color with complementary or analogous hue
+  const useComplementary = Math.random() > 0.5
+  const secondaryHue = useComplementary
+    ? (primaryHue + 150 + Math.floor(Math.random() * 60)) % 360 // Complementary with variation
+    : (primaryHue + 30 + Math.floor(Math.random() * 60)) % 360 // Analogous
+
+  const secondarySat = 45 + Math.floor(Math.random() * 25) // 45-70%
+  const secondaryLight = 45 + Math.floor(Math.random() * 15) // 45-60%
+
+  const secondaryRgb = hslToRgb(secondaryHue, secondarySat, secondaryLight)
+  const secondary = rgbToHex(secondaryRgb.r, secondaryRgb.g, secondaryRgb.b)
+
+  return { primary, secondary }
+}
+
+/**
+ * Generate shadow CSS string with custom color
+ */
+export function generateShadowWithColor(shadowTemplate: string, color: string): string {
+  const rgb = hexToRgb(color)
+  if (!rgb) return shadowTemplate
+
+  // Replace rgb(0 0 0 / opacity) with custom color
+  return shadowTemplate.replace(/rgb\(0 0 0 \/ ([\d.]+)\)/g, (_, opacity) => {
+    return `rgb(${rgb.r} ${rgb.g} ${rgb.b} / ${opacity})`
+  })
+}

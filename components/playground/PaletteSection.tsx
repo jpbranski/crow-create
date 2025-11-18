@@ -11,7 +11,7 @@ import {
   Chip,
   Alert,
 } from '@mui/material'
-import { AutoAwesome, CloudUpload } from '@mui/icons-material'
+import { AutoAwesome, CloudUpload, Shuffle } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import {
   getContrastRatio,
@@ -19,6 +19,7 @@ import {
   extractColorsFromImage,
   generateSemanticColors,
   adjustLightness,
+  generateRandomPalette,
 } from '@/lib/colorUtils'
 import ColorPicker from './ColorPicker'
 import WCAGChecker from './WCAGChecker'
@@ -78,14 +79,45 @@ export default function PaletteSection() {
     })
   }
 
+  const handleRandomizePalette = () => {
+    const { primary, secondary } = generateRandomPalette()
+    const semantic = generateSemanticColors(primary)
+    const primaryDark = adjustLightness(primary, -20)
+    const primaryLight = adjustLightness(primary, 20)
+    const secondaryDark = adjustLightness(secondary, -20)
+    const secondaryLight = adjustLightness(secondary, 20)
+
+    updatePalette({
+      primary,
+      secondary,
+      primaryDark,
+      primaryLight,
+      secondaryDark,
+      secondaryLight,
+      ...semantic,
+    })
+  }
+
   return (
     <Box>
-      <Typography variant="h5" gutterBottom fontWeight={600}>
-        Color Palette & Accessibility
-      </Typography>
-      <Typography variant="body2" color="text.secondary" paragraph>
-        Build your color palette and ensure it meets WCAG accessibility standards
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+        <Box>
+          <Typography variant="h5" gutterBottom fontWeight={600}>
+            Color Palette & Accessibility
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Build your color palette and ensure it meets WCAG accessibility standards
+          </Typography>
+        </Box>
+        <Button
+          variant="contained"
+          startIcon={<Shuffle />}
+          onClick={handleRandomizePalette}
+          sx={{ ml: 2, flexShrink: 0 }}
+        >
+          Randomize
+        </Button>
+      </Box>
 
       <Grid container spacing={3}>
         {/* Logo Upload */}

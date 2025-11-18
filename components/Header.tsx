@@ -85,10 +85,10 @@ export default function Header() {
         {/* Desktop navigation */}
         {!isMobile && (
           <Box sx={{ display: 'flex', gap: 1, flexGrow: 1 }}>
-            <Button component={Link} href="/" color="inherit">
-              Playground
+            <Button component={Link} href="/create" color="inherit">
+              Create
             </Button>
-            <Button component={Link} href="/#overview" color="inherit">
+            <Button component={Link} href="/docs" color="inherit">
               Docs
             </Button>
             <Button
@@ -152,14 +152,14 @@ export default function Header() {
         <Box sx={{ width: 250 }} role="presentation">
           <List>
             <ListItem disablePadding>
-              <ListItemButton component={Link} href="/" onClick={() => setMobileMenuOpen(false)}>
-                <ListItemText primary="Playground" />
+              <ListItemButton component={Link} href="/create" onClick={() => setMobileMenuOpen(false)}>
+                <ListItemText primary="Create" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
               <ListItemButton
                 component={Link}
-                href="/#overview"
+                href="/docs"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <ListItemText primary="Docs" />

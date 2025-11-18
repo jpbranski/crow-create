@@ -11,8 +11,11 @@ import {
   FormControl,
   InputLabel,
   Chip,
+  Tooltip,
+  IconButton,
+  Link,
 } from '@mui/material'
-import { CheckCircle, Cancel, Warning } from '@mui/icons-material'
+import { CheckCircle, Cancel, Warning, HelpOutline } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import { getContrastRatio, getWCAGLevel } from '@/lib/colorUtils'
 
@@ -155,9 +158,54 @@ export default function WCAGChecker() {
         <Grid item xs={12}>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <Box>
-              <Typography variant="subtitle2" gutterBottom>
-                Contrast Ratio
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Contrast Ratio
+                </Typography>
+                <Tooltip
+                  title={
+                    <Box sx={{ p: 1 }}>
+                      <Typography variant="body2" paragraph>
+                        <strong>WCAG Contrast Formula:</strong> Contrast ratio is calculated using
+                        the relative luminance of two colors.
+                      </Typography>
+                      <Typography variant="body2" paragraph sx={{ mb: 1 }}>
+                        <strong>AA:</strong> Minimum standard for normal text (4.5:1) and large text (3:1)
+                      </Typography>
+                      <Typography variant="body2" paragraph sx={{ mb: 1 }}>
+                        <strong>AAA:</strong> Enhanced standard for normal text (7:1) and large text (4.5:1)
+                      </Typography>
+                      <Typography variant="body2" sx={{ mb: 1 }}>
+                        <strong>Learn more:</strong>
+                      </Typography>
+                      <Link
+                        href="https://www.w3.org/TR/WCAG21/#contrast-minimum"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        color="inherit"
+                        sx={{ display: 'block', mb: 0.5 }}
+                      >
+                        → WCAG 2.1 Contrast Guidelines
+                      </Link>
+                      <Link
+                        href="https://webaim.org/resources/contrastchecker/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        color="inherit"
+                        sx={{ display: 'block' }}
+                      >
+                        → WebAIM Contrast Checker
+                      </Link>
+                    </Box>
+                  }
+                  arrow
+                  placement="top"
+                >
+                  <IconButton size="small" sx={{ p: 0.5 }}>
+                    <HelpOutline fontSize="small" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
               <Typography variant="h4" fontWeight={600}>
                 {ratio.toFixed(2)}:1
               </Typography>
