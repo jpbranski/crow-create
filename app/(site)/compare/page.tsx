@@ -142,7 +142,7 @@ export default function ComparePage() {
                 <Select
                   value={themeA.id}
                   label="Theme A"
-                  onChange={(e) => {
+                  onChange={(e: any) => {
                     const theme = getThemeById(e.target.value)
                     if (theme) setThemeA(theme)
                   }}
@@ -191,7 +191,7 @@ export default function ComparePage() {
                 <Select
                   value={themeB.id}
                   label="Theme B"
-                  onChange={(e) => {
+                  onChange={(e: any) => {
                     const theme = getThemeById(e.target.value)
                     if (theme) setThemeB(theme)
                   }}
