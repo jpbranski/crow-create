@@ -3,14 +3,15 @@
 import { useState } from 'react'
 import {
   Box,
-  Grid,
   Typography,
   TextField,
   Paper,
   Button,
   Chip,
   Alert,
+  Tooltip,
 } from '@mui/material'
+import Grid2 from '@mui/material/Grid2'
 import { AutoAwesome, CloudUpload, Shuffle } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import {
@@ -119,9 +120,9 @@ export default function PaletteSection() {
         </Button>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid2 container spacing={3}>
         {/* Logo Upload */}
-        <Grid item xs={12}>
+        <Grid2 size={{ xs: 12 }}>
           <Paper variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>
               Extract from Logo
@@ -148,10 +149,10 @@ export default function PaletteSection() {
               </Alert>
             )}
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Primary Colors */}
-        <Grid item xs={12} md={6}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Paper variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>
               Primary Color
@@ -178,10 +179,10 @@ export default function PaletteSection() {
               />
             </Box>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Secondary Colors */}
-        <Grid item xs={12} md={6}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Paper variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>
               Secondary Color
@@ -208,98 +209,104 @@ export default function PaletteSection() {
               />
             </Box>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Semantic Colors */}
-        <Grid item xs={12}>
+        <Grid2 size={{ xs: 12 }}>
           <Paper variant="outlined" sx={{ p: 2 }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
               <Typography variant="h6">Semantic Colors</Typography>
-              <Button
-                variant="outlined"
-                startIcon={<AutoAwesome />}
-                onClick={handleEnhancePalette}
+              <Tooltip
+                title="Automatically improves contrast, harmonizes tones, and adjusts accessibility values while preserving the palette's identity."
+                arrow
+                placement="top"
               >
-                Enhance Palette
-              </Button>
+                <Button
+                  variant="outlined"
+                  startIcon={<AutoAwesome />}
+                  onClick={handleEnhancePalette}
+                >
+                  Enhance Palette
+                </Button>
+              </Tooltip>
             </Box>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={3}>
+            <Grid2 container spacing={2}>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Success"
                   value={config.palette.success}
                   onChange={(value) => handleColorChange('success', value)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Warning"
                   value={config.palette.warning}
                   onChange={(value) => handleColorChange('warning', value)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Error"
                   value={config.palette.error}
                   onChange={(value) => handleColorChange('error', value)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Info"
                   value={config.palette.info}
                   onChange={(value) => handleColorChange('info', value)}
                 />
-              </Grid>
-            </Grid>
+              </Grid2>
+            </Grid2>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Background & Text Colors */}
-        <Grid item xs={12}>
+        <Grid2 size={{ xs: 12 }}>
           <Paper variant="outlined" sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom>
               Background & Text
             </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={3}>
+            <Grid2 container spacing={2}>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Background"
                   value={config.palette.background}
                   onChange={(value) => handleColorChange('background', value)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Surface"
                   value={config.palette.surface}
                   onChange={(value) => handleColorChange('surface', value)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Text Primary"
                   value={config.palette.textPrimary}
                   onChange={(value) => handleColorChange('textPrimary', value)}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
+              </Grid2>
+              <Grid2 size={{ xs: 12, sm: 6, md: 3 }}>
                 <ColorPicker
                   label="Text Secondary"
                   value={config.palette.textSecondary}
                   onChange={(value) => handleColorChange('textSecondary', value)}
                 />
-              </Grid>
-            </Grid>
+              </Grid2>
+            </Grid2>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* WCAG Contrast Checker */}
-        <Grid item xs={12}>
+        <Grid2 size={{ xs: 12 }}>
           <WCAGChecker />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Box>
   )
 }
