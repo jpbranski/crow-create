@@ -96,9 +96,18 @@ const lightThemeOptions: ThemeOptions = {
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
+        },
+      },
+    },
     MuiCard: {
       styleOverrides: {
         root: {
+          backgroundImage: 'none',
+          backgroundColor: '#FFFFFF',
           boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
         },
       },
@@ -150,9 +159,18 @@ const darkThemeOptions: ThemeOptions = {
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundImage: 'none',
+        },
+      },
+    },
     MuiCard: {
       styleOverrides: {
         root: {
+          backgroundImage: 'none',
+          backgroundColor: '#161B22',
           boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.3)',
         },
       },

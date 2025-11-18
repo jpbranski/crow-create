@@ -48,7 +48,7 @@ export default function AffiliateCard({ data }: AffiliateCardProps) {
             }}
           >
             {/* Icon would go here - for now using initials */}
-            <Typography variant="body2" sx={{ color: '#fff', fontWeight: 700 }}>
+            <Typography variant="body2" sx={{ color: 'common.white', fontWeight: 700 }}>
               {data.label.charAt(0)}
             </Typography>
           </Box>
@@ -70,7 +70,7 @@ export default function AffiliateCard({ data }: AffiliateCardProps) {
           endIcon={<OpenInNew />}
           href={data.url}
           target="_blank"
-          rel="noopener noreferrer sponsored"
+          rel="noopener noreferrer"
           fullWidth
           sx={{ mt: 'auto' }}
         >

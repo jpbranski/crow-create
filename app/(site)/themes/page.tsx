@@ -1,13 +1,11 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Container, Box, Typography, Grid, Snackbar, Alert } from '@mui/material'
 import { Palette } from '@mui/icons-material'
 import { curatedThemes, CuratedTheme } from '@/data/curatedThemes'
-import { getAffiliatesForInjection } from '@/data/affiliatePool'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import ThemeCard from '@/components/ThemeCard'
-import AffiliateCard from '@/components/AffiliateCard'
 import { useRouter } from 'next/navigation'
 
 export default function ThemesPage() {
@@ -15,33 +13,6 @@ export default function ThemesPage() {
   const { loadConfig } = useDesignSystem()
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
-
-  // Get affiliates to inject
-  const affiliatesToInject = useMemo(() => {
-    return getAffiliatesForInjection(curatedThemes.length, 6)
-  }, [])
-
-  // Create merged array with themes and affiliates
-  const items = useMemo(() => {
-    const result: Array<{ type: 'theme' | 'affiliate'; data: any; index: number }> = []
-    let affiliateIndex = 0
-
-    curatedThemes.forEach((theme, index) => {
-      result.push({ type: 'theme', data: theme, index })
-
-      // Insert affiliate after every 6 items
-      if ((index + 1) % 6 === 0 && affiliateIndex < affiliatesToInject.length) {
-        result.push({
-          type: 'affiliate',
-          data: affiliatesToInject[affiliateIndex],
-          index: -affiliateIndex - 1,
-        })
-        affiliateIndex++
-      }
-    })
-
-    return result
-  }, [affiliatesToInject])
 
   const handleApplyTheme = (theme: CuratedTheme) => {
     // Convert curated theme to full design system config
@@ -121,15 +92,11 @@ export default function ThemesPage() {
           </Typography>
         </Box>
 
-        {/* Themes Grid with Injected Affiliates */}
+        {/* Themes Grid */}
         <Grid container spacing={3}>
-          {items.map((item) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={`${item.type}-${item.index}`}>
-              {item.type === 'theme' ? (
-                <ThemeCard theme={item.data} onApply={handleApplyTheme} />
-              ) : (
-                <AffiliateCard data={item.data} />
-              )}
+          {curatedThemes.map((theme) => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={theme.id}>
+              <ThemeCard theme={theme} onApply={handleApplyTheme} />
             </Grid>
           ))}
         </Grid>
