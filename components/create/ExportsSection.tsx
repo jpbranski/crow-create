@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Typography, Grid, Paper, Tabs, Tab } from '@mui/material'
+import { Box, Typography, Paper, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import CodeBlock from '../CodeBlock'

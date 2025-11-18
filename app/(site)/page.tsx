@@ -5,7 +5,6 @@ import {
   Box,
   Typography,
   Button,
-  Grid,
   Card,
   CardContent,
   useTheme,
@@ -13,6 +12,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from '@mui/material'
+import Grid2 from '@mui/material/Grid2'
 import {
   Palette as PaletteIcon,
   Accessibility,
@@ -266,9 +266,9 @@ export default function AboutPage() {
           </Typography>
         </Box>
 
-        <Grid container spacing={4}>
+        <Grid2 container spacing={4}>
           {features.map((feature, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid2 size={{ xs: 12, sm: 6, md: 4 }} key={index}>
               <Card
                 sx={{
                   height: '100%',
@@ -290,9 +290,9 @@ export default function AboutPage() {
                   </Typography>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid2>
           ))}
-        </Grid>
+        </Grid2>
       </Container>
 
       {/* Why Section */}
