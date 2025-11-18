@@ -73,7 +73,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <Box
         sx={{
-          bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'grey.50',
+          bgcolor: (theme) => theme.palette.background.default,
           pt: { xs: 8, md: 12 },
           pb: { xs: 8, md: 12 },
         }}
@@ -141,7 +141,7 @@ export default function AboutPage() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 minHeight: 200,
-                bgcolor: theme.palette.mode === 'dark' ? 'grey.800' : 'grey.100',
+                bgcolor: (theme) => theme.palette.background.default,
                 borderRadius: 1,
                 position: 'relative',
                 overflow: 'hidden',
