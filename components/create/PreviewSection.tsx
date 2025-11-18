@@ -15,8 +15,8 @@ import {
   IconButton,
   Checkbox,
   FormControlLabel,
-  Grid,
 } from '@mui/material'
+import Grid2 from '@mui/material/Grid2'
 import {
   Favorite,
   Share,
@@ -57,10 +57,10 @@ export default function PreviewSection() {
     <Box sx={previewStyle}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
         <Box>
-          <Typography variant="h5" gutterBottom fontWeight={600}>
+          <Typography variant="h5" gutterBottom fontWeight={600} sx={{ color: config.palette.textPrimary }}>
             Component Preview
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
             See your design system in action with live component examples
           </Typography>
         </Box>
@@ -74,9 +74,9 @@ export default function PreviewSection() {
         </Button>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid2 container spacing={3}>
         {/* Hero Section */}
-        <Grid item xs={12}>
+        <Grid2 size={{ xs: 12 }}>
           <Paper
             variant="outlined"
             sx={{
@@ -112,6 +112,7 @@ export default function PreviewSection() {
                 size="large"
                 sx={{
                   bgcolor: config.palette.primary,
+                  color: config.palette.surface,
                   borderRadius: `${config.radius.medium}px`,
                   transition: `all ${config.motion.duration.normal}ms ${config.motion.easing}`,
                   '&:hover': {
@@ -134,10 +135,10 @@ export default function PreviewSection() {
               </Button>
             </Box>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Feature Cards */}
-        <Grid item xs={12} md={4}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
           <Card
             sx={{
               height: '100%',
@@ -158,11 +159,11 @@ export default function PreviewSection() {
               <Typography
                 variant="h6"
                 gutterBottom
-                sx={{ fontFamily: config.typography.headingFont }}
+                sx={{ fontFamily: config.typography.headingFont, color: config.palette.textPrimary }}
               >
                 Accessible
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
                 Built with WCAG compliance in mind, ensuring your interfaces work for everyone.
               </Typography>
             </CardContent>
@@ -177,9 +178,9 @@ export default function PreviewSection() {
               </Button>
             </CardActions>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} md={4}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
           <Card
             sx={{
               height: '100%',
@@ -200,11 +201,11 @@ export default function PreviewSection() {
               <Typography
                 variant="h6"
                 gutterBottom
-                sx={{ fontFamily: config.typography.headingFont }}
+                sx={{ fontFamily: config.typography.headingFont, color: config.palette.textPrimary }}
               >
                 Customizable
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
                 Tailor every aspect of your design system to match your brand perfectly.
               </Typography>
             </CardContent>
@@ -219,9 +220,9 @@ export default function PreviewSection() {
               </Button>
             </CardActions>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} md={4}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
           <Card
             sx={{
               height: '100%',
@@ -242,11 +243,11 @@ export default function PreviewSection() {
               <Typography
                 variant="h6"
                 gutterBottom
-                sx={{ fontFamily: config.typography.headingFont }}
+                sx={{ fontFamily: config.typography.headingFont, color: config.palette.textPrimary }}
               >
                 Exportable
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
                 Export your design tokens for MUI, Tailwind, CSS variables, and more.
               </Typography>
             </CardContent>
@@ -261,12 +262,12 @@ export default function PreviewSection() {
               </Button>
             </CardActions>
           </Card>
-        </Grid>
+        </Grid2>
 
         {/* Form Elements */}
-        <Grid item xs={12} md={6}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Paper variant="outlined" sx={{ p: 3, bgcolor: config.palette.surface, borderRadius: `${config.radius.medium}px` }}>
-            <Typography variant="h6" gutterBottom sx={{ fontFamily: config.typography.headingFont }}>
+            <Typography variant="h6" gutterBottom sx={{ fontFamily: config.typography.headingFont, color: config.palette.textPrimary }}>
               Contact Form
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -303,11 +304,13 @@ export default function PreviewSection() {
               <FormControlLabel
                 control={<Checkbox />}
                 label="I agree to the terms and conditions"
+                sx={{ '& .MuiFormControlLabel-label': { color: config.palette.textPrimary } }}
               />
               <Button
                 variant="contained"
                 sx={{
                   bgcolor: config.palette.primary,
+                  color: config.palette.surface,
                   borderRadius: `${config.radius.medium}px`,
                 }}
               >
@@ -315,12 +318,12 @@ export default function PreviewSection() {
               </Button>
             </Box>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Alerts & Chips */}
-        <Grid item xs={12} md={6}>
+        <Grid2 size={{ xs: 12, md: 6 }}>
           <Paper variant="outlined" sx={{ p: 3, bgcolor: config.palette.surface, borderRadius: `${config.radius.medium}px` }}>
-            <Typography variant="h6" gutterBottom sx={{ fontFamily: config.typography.headingFont }}>
+            <Typography variant="h6" gutterBottom sx={{ fontFamily: config.typography.headingFont, color: config.palette.textPrimary }}>
               Alerts & Status
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -354,7 +357,7 @@ export default function PreviewSection() {
               </Alert>
 
               <Box sx={{ mt: 2 }}>
-                <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+                <Typography variant="caption" gutterBottom display="block" sx={{ color: config.palette.textSecondary }}>
                   Status Tags
                 </Typography>
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
@@ -380,8 +383,8 @@ export default function PreviewSection() {
               </Box>
             </Box>
           </Paper>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Box>
   )
 }
