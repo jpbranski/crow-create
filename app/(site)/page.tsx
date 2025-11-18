@@ -21,6 +21,8 @@ import {
   Speed,
   Security,
   ExpandMore,
+  ColorLens,
+  Compare,
 } from '@mui/icons-material'
 import Link from 'next/link'
 
@@ -30,39 +32,39 @@ export default function AboutPage() {
   const features = [
     {
       icon: <PaletteIcon sx={{ fontSize: 48, color: 'primary.main' }} />,
-      title: 'Color Palette Creation',
+      title: 'Design Token Exporter',
       description:
-        'Build beautiful color palettes with intelligent shade generation. Extract colors from images or create from scratch.',
-    },
-    {
-      icon: <Accessibility sx={{ fontSize: 48, color: 'primary.main' }} />,
-      title: 'WCAG Compliance',
-      description:
-        'Ensure your designs meet accessibility standards with built-in WCAG 2.1 contrast ratio checking for AA and AAA compliance.',
-    },
-    {
-      icon: <Code sx={{ fontSize: 48, color: 'primary.main' }} />,
-      title: 'Multi-Framework Export',
-      description:
-        'Export your design system to Material-UI, Tailwind CSS, CSS Variables, or JSON design tokens with a single click.',
+        'Build beautiful color palettes with intelligent shade generation. Export to MUI, Tailwind, CSS variables, or JSON.',
     },
     {
       icon: <Settings sx={{ fontSize: 48, color: 'primary.main' }} />,
-      title: 'Complete Customization',
+      title: 'Typography Tools',
       description:
-        'Configure typography scales, spacing systems, border radius, shadows, and motion - all with live previews.',
+        'Configure typography scales, font pairings, and type systems with intelligent suggestions and live previews.',
+    },
+    {
+      icon: <Accessibility sx={{ fontSize: 48, color: 'primary.main' }} />,
+      title: 'Accessibility Checker',
+      description:
+        'Ensure your designs meet WCAG 2.1 standards with built-in contrast ratio checking for AA and AAA compliance.',
     },
     {
       icon: <Speed sx={{ fontSize: 48, color: 'primary.main' }} />,
-      title: 'Instant Preview',
+      title: 'Component Previews',
       description:
-        'See your design system come to life with real-time component previews showing buttons, cards, forms, and more.',
+        'See your design system in action with real-time component previews showing buttons, cards, forms, and more.',
     },
     {
-      icon: <Security sx={{ fontSize: 48, color: 'primary.main' }} />,
-      title: 'Privacy-First',
+      icon: <ColorLens sx={{ fontSize: 48, color: 'primary.main' }} />,
+      title: 'Theme Library',
       description:
-        'All data is stored locally in your browser. No accounts, no servers, no tracking. Your designs stay yours.',
+        'Explore curated, accessible themes. Apply instantly or use as inspiration for your own custom designs.',
+    },
+    {
+      icon: <Compare sx={{ fontSize: 48, color: 'primary.main' }} />,
+      title: 'Compare Tool',
+      description:
+        'Compare themes side-by-side with synchronized previews. Find the perfect palette for your project.',
     },
   ]
 
@@ -114,7 +116,7 @@ export default function AboutPage() {
                 size="large"
                 sx={{ px: 4, py: 1.5, fontSize: '1.1rem' }}
               >
-                View Documentation
+                View Docs
               </Button>
             </Box>
           </Box>
