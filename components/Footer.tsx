@@ -26,6 +26,7 @@ export default function Footer() {
             justifyContent: 'space-between',
             alignItems: { xs: 'flex-start', sm: 'center' },
             gap: 2,
+            mb: 2,
           }}
         >
           <Typography variant="body2" color="text.secondary">
@@ -89,6 +90,20 @@ export default function Footer() {
             </MuiLink>
           </Box>
         </Box>
+
+        {/* Affiliate Disclaimer */}
+        <Typography
+          variant="caption"
+          sx={{
+            display: 'block',
+            textAlign: 'center',
+            color: 'text.disabled',
+            opacity: 0.7,
+            fontSize: '0.7rem',
+          }}
+        >
+          As an Amazon Associate I earn from qualifying purchases.
+        </Typography>
       </Container>
     </Box>
   )

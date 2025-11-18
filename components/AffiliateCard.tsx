@@ -28,7 +28,7 @@ export default function AffiliateCard({ item }: AffiliateCardProps) {
         },
       }}
     >
-      {/* "Sponsored" badge */}
+      {/* "Affiliate" badge */}
       <Box
         sx={{
           position: 'absolute',
@@ -46,7 +46,7 @@ export default function AffiliateCard({ item }: AffiliateCardProps) {
           boxShadow: 2,
         }}
       >
-        Sponsored
+        Affiliate
       </Box>
 
       <CardContent
@@ -131,7 +131,7 @@ export default function AffiliateCard({ item }: AffiliateCardProps) {
             lineHeight: 1.3,
           }}
         >
-          As an Amazon Associate, we earn from qualifying purchases at no extra cost to you.
+          As an Amazon Associate, I earn from qualifying purchases.
         </Typography>
       </CardContent>
     </Card>
