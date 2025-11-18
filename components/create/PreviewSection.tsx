@@ -57,13 +57,23 @@ export default function PreviewSection() {
     <Box sx={previewStyle}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
         <Box>
-          <Typography variant="h5" gutterBottom fontWeight={600} sx={{ color: config.palette.textPrimary }}>
+          <Typography
+            variant="h5"
+            gutterBottom
+            fontWeight={600}
+            color="text.primary"
+          >
             Component Preview
           </Typography>
-          <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+          >
             See your design system in action with live component examples
           </Typography>
         </Box>
+
         <Button
           variant="outlined"
           startIcon={<Compare />}
