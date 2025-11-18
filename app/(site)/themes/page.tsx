@@ -1,9 +1,21 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Container, Box, Typography, Snackbar, Alert } from '@mui/material'
+import { useState, useMemo, useEffect } from 'react'
+import {
+  Container,
+  Box,
+  Typography,
+  Snackbar,
+  Alert,
+  TextField,
+  ToggleButtonGroup,
+  ToggleButton,
+  Paper,
+  InputAdornment,
+  Tooltip,
+} from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
-import { Palette } from '@mui/icons-material'
+import { Palette, Search, SentimentDissatisfied } from '@mui/icons-material'
 import { curatedThemes, CuratedTheme } from '@/data/curatedThemes'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import ThemeCard from '@/components/ThemeCard'
@@ -16,15 +28,48 @@ export default function ThemesPage() {
   const { loadConfig } = useDesignSystem()
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
+  const [wcagFilter, setWcagFilter] = useState<string[]>([])
+
+  // Debounce search input
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery)
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [searchQuery])
+
+  // Filter themes based on search and WCAG level
+  const filteredThemes = useMemo(() => {
+    let filtered = curatedThemes
+
+    // Apply search filter
+    if (debouncedSearch) {
+      const query = debouncedSearch.toLowerCase()
+      filtered = filtered.filter(
+        (theme) =>
+          theme.name.toLowerCase().includes(query) ||
+          theme.description.toLowerCase().includes(query)
+      )
+    }
+
+    // Apply WCAG filter
+    if (wcagFilter.length > 0) {
+      filtered = filtered.filter((theme) => wcagFilter.includes(theme.wcagLevel))
+    }
+
+    return filtered
+  }, [debouncedSearch, wcagFilter])
 
   // Generate affiliate injection map (stable per render)
-  const affiliateMap = useMemo(() => getAffiliateInjectionMap(curatedThemes.length), [])
+  const affiliateMap = useMemo(() => getAffiliateInjectionMap(filteredThemes.length), [filteredThemes.length])
 
   // Build combined items array with themes and affiliates
   const gridItems = useMemo(() => {
     const items: Array<{ type: 'theme' | 'affiliate'; data: any; key: string }> = []
 
-    curatedThemes.forEach((theme, index) => {
+    filteredThemes.forEach((theme, index) => {
       // Add theme card
       items.push({
         type: 'theme',
@@ -44,7 +89,7 @@ export default function ThemesPage() {
     })
 
     return items
-  }, [affiliateMap])
+  }, [filteredThemes, affiliateMap])
 
   const handleApplyTheme = (theme: CuratedTheme) => {
     // Convert curated theme to full design system config
@@ -118,24 +163,98 @@ export default function ThemesPage() {
           <Typography variant="h2" component="h1" fontWeight={700} gutterBottom>
             Explore Beautiful Themes
           </Typography>
-          <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto' }}>
+          <Typography variant="h5" color="text.secondary" sx={{ maxWidth: '800px', mx: 'auto', mb: 4 }}>
             Discover our curated collection of accessible, WCAG-compliant themes. Preview, compare,
             and apply them instantly.
           </Typography>
+
+          {/* Search and Filter Controls */}
+          <Box sx={{ maxWidth: '800px', mx: 'auto', mb: 4 }}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Search themes by name or description..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ mb: 3 }}
+            />
+
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+              <Typography variant="body2" color="text.secondary" fontWeight={600}>
+                Filter by WCAG Level:
+              </Typography>
+              <ToggleButtonGroup
+                value={wcagFilter}
+                onChange={(_e, newFilter) => setWcagFilter(newFilter)}
+                aria-label="WCAG filter"
+                size="small"
+              >
+                <Tooltip title="Show only themes that pass WCAG AA contrast guidelines" arrow>
+                  <ToggleButton value="AA" aria-label="WCAG AA">
+                    AA
+                  </ToggleButton>
+                </Tooltip>
+                <Tooltip title="Show only themes that pass WCAG AAA contrast guidelines" arrow>
+                  <ToggleButton value="AAA" aria-label="WCAG AAA">
+                    AAA
+                  </ToggleButton>
+                </Tooltip>
+              </ToggleButtonGroup>
+            </Box>
+          </Box>
         </Box>
 
         {/* Themes Grid */}
-        <Grid2 container spacing={3}>
-          {gridItems.map((item) => (
-            <Grid2 size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.key}>
-              {item.type === 'theme' ? (
-                <ThemeCard theme={item.data} onApply={handleApplyTheme} />
-              ) : (
-                <AffiliateCard item={item.data} />
-              )}
-            </Grid2>
-          ))}
-        </Grid2>
+        {gridItems.length > 0 ? (
+          <Grid2 container spacing={3}>
+            {gridItems.map((item) => (
+              <Grid2 size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={item.key}>
+                {item.type === 'theme' ? (
+                  <ThemeCard theme={item.data} onApply={handleApplyTheme} />
+                ) : (
+                  <AffiliateCard item={item.data} />
+                )}
+              </Grid2>
+            ))}
+          </Grid2>
+        ) : (
+          <Paper
+            sx={{
+              p: 6,
+              textAlign: 'center',
+              bgcolor: 'background.paper',
+              borderRadius: 2,
+            }}
+          >
+            <SentimentDissatisfied sx={{ fontSize: 64, color: 'text.secondary', mb: 2 }} />
+            <Typography variant="h5" fontWeight={600} gutterBottom>
+              No Themes Found
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              We couldn&apos;t find any themes matching your search or filters. Try adjusting your criteria or{' '}
+              <Typography
+                component="a"
+                href="/create"
+                sx={{
+                  color: 'primary.main',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  '&:hover': { textDecoration: 'underline' },
+                }}
+              >
+                create your own custom theme
+              </Typography>
+              .
+            </Typography>
+          </Paper>
+        )}
 
         {/* Bottom CTA */}
         <Box sx={{ textAlign: 'center', mt: 8 }}>
