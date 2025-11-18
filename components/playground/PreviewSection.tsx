@@ -119,6 +119,7 @@ export default function PreviewSection() {
           <Card
             sx={{
               height: '100%',
+              bgcolor: config.palette.surface,
               boxShadow: config.shadows.md,
               borderRadius: `${config.radius.medium}px`,
             }}
@@ -160,6 +161,7 @@ export default function PreviewSection() {
           <Card
             sx={{
               height: '100%',
+              bgcolor: config.palette.surface,
               boxShadow: config.shadows.md,
               borderRadius: `${config.radius.medium}px`,
             }}
@@ -201,6 +203,7 @@ export default function PreviewSection() {
           <Card
             sx={{
               height: '100%',
+              bgcolor: config.palette.surface,
               boxShadow: config.shadows.md,
               borderRadius: `${config.radius.medium}px`,
             }}
@@ -240,7 +243,7 @@ export default function PreviewSection() {
 
         {/* Form Elements */}
         <Grid item xs={12} md={6}>
-          <Paper variant="outlined" sx={{ p: 3, borderRadius: `${config.radius.medium}px` }}>
+          <Paper variant="outlined" sx={{ p: 3, bgcolor: config.palette.surface, borderRadius: `${config.radius.medium}px` }}>
             <Typography variant="h6" gutterBottom sx={{ fontFamily: config.typography.headingFont }}>
               Contact Form
             </Typography>
@@ -294,7 +297,7 @@ export default function PreviewSection() {
 
         {/* Alerts & Chips */}
         <Grid item xs={12} md={6}>
-          <Paper variant="outlined" sx={{ p: 3, borderRadius: `${config.radius.medium}px` }}>
+          <Paper variant="outlined" sx={{ p: 3, bgcolor: config.palette.surface, borderRadius: `${config.radius.medium}px` }}>
             <Typography variant="h6" gutterBottom sx={{ fontFamily: config.typography.headingFont }}>
               Alerts & Status
             </Typography>

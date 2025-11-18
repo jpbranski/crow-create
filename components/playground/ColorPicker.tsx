@@ -9,6 +9,15 @@ interface ColorPickerProps {
 }
 
 export default function ColorPicker({ label, value, onChange }: ColorPickerProps) {
+  // Normalize hex value (ensure it starts with #)
+  const normalizeHex = (val: string): string => {
+    const cleaned = val.replace(/^#+/, '') // Remove all leading #
+    return cleaned ? `#${cleaned}` : '#'
+  }
+
+  // Display value without # since we have it as startAdornment
+  const displayValue = value.startsWith('#') ? value.slice(1) : value
+
   return (
     <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
       <Box
@@ -35,11 +44,12 @@ export default function ColorPicker({ label, value, onChange }: ColorPickerProps
       />
       <TextField
         label={label}
-        value={value}
+        value={displayValue}
         onChange={(e) => {
           const val = e.target.value
-          if (/^#[0-9A-Fa-f]{0,6}$/.test(val) || val === '') {
-            onChange(val)
+          // Allow only valid hex characters (without requiring #)
+          if (/^[0-9A-Fa-f]{0,6}$/.test(val) || val === '') {
+            onChange(normalizeHex(val))
           }
         }}
         size="small"
@@ -48,7 +58,7 @@ export default function ColorPicker({ label, value, onChange }: ColorPickerProps
           startAdornment: <InputAdornment position="start">#</InputAdornment>,
         }}
         inputProps={{
-          maxLength: 7,
+          maxLength: 6,
           style: { textTransform: 'uppercase' },
         }}
       />

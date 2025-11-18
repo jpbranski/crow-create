@@ -163,21 +163,29 @@ export default function TypographySection() {
               <Typography variant="caption" color="text.secondary" gutterBottom display="block">
                 Scale Ratio: {config.typography.scale.toFixed(2)}
               </Typography>
-              <Slider
-                value={config.typography.scale}
-                onChange={(_e, value) => updateTypography({ scale: value as number })}
-                min={1.125}
-                max={1.5}
-                step={0.025}
-                marks={[
-                  { value: 1.125, label: 'Minor 2nd' },
-                  { value: 1.25, label: 'Major 3rd' },
-                  { value: 1.333, label: 'Perfect 4th' },
-                  { value: 1.5, label: 'Perfect 5th' },
-                ]}
-                valueLabelDisplay="auto"
-                valueLabelFormat={(v) => v.toFixed(2)}
-              />
+              <Box sx={{ px: 1 }}>
+                <Slider
+                  value={config.typography.scale}
+                  onChange={(_e, value) => updateTypography({ scale: value as number })}
+                  min={1.125}
+                  max={1.5}
+                  step={0.025}
+                  marks={[
+                    { value: 1.125, label: <span style={{ fontSize: '0.65rem' }}>Minor 2nd</span> },
+                    { value: 1.25, label: <span style={{ fontSize: '0.65rem' }}>Major 3rd</span> },
+                    { value: 1.333, label: <span style={{ fontSize: '0.65rem' }}>Perfect 4th</span> },
+                    { value: 1.5, label: <span style={{ fontSize: '0.65rem' }}>Perfect 5th</span> },
+                  ]}
+                  valueLabelDisplay="auto"
+                  valueLabelFormat={(v) => v.toFixed(2)}
+                  sx={{
+                    '& .MuiSlider-markLabel': {
+                      fontSize: '0.65rem',
+                      whiteSpace: 'nowrap',
+                    },
+                  }}
+                />
+              </Box>
             </Box>
           </Paper>
         </Grid>
