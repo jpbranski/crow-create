@@ -4,11 +4,11 @@ import {
   Container,
   Box,
   Typography,
-  Grid,
   Card,
   CardContent,
   Link as MuiLink,
 } from '@mui/material'
+import Grid2 from '@mui/material/Grid2'
 import {
   Palette,
   Accessibility,
@@ -256,11 +256,11 @@ export default function ResourcesPage() {
               </Typography>
             </Box>
 
-            <Grid container spacing={3}>
+            <Grid2 container spacing={3}>
               {resources
                 .filter((r) => r.category === category)
                 .map((resource) => (
-                  <Grid item xs={12} sm={6} md={4} key={resource.name}>
+                  <Grid2 size={{ xs: 12, sm: 6, md: 4 }} key={resource.name}>
                     <Card
                       sx={{
                         height: '100%',
@@ -300,9 +300,9 @@ export default function ResourcesPage() {
                         </MuiLink>
                       </CardContent>
                     </Card>
-                  </Grid>
+                  </Grid2>
                 ))}
-            </Grid>
+            </Grid2>
           </Box>
         ))}
 
