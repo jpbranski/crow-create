@@ -58,7 +58,8 @@ export default function AccessibilityPage() {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <CheckCircle sx={{ color: 'success.main', mr: 1 }} fontSize="small" />
                   <strong>AA</strong>
-                </TableCell>
+                </Box>
+              </TableCell>
               <TableCell>4.5:1</TableCell>
               <TableCell>3:1</TableCell>
               <TableCell>Minimum for most content</TableCell>
@@ -68,7 +69,8 @@ export default function AccessibilityPage() {
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <CheckCircle sx={{ color: 'success.dark', mr: 1 }} fontSize="small" />
                   <strong>AAA</strong>
-                </TableCell>
+                </Box>
+              </TableCell>
               <TableCell>7:1</TableCell>
               <TableCell>4.5:1</TableCell>
               <TableCell>Enhanced for critical content</TableCell>
