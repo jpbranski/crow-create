@@ -25,11 +25,14 @@ import {
   Info,
   Warning,
   Error as ErrorIcon,
+  Compare,
 } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
+import { useRouter } from 'next/navigation'
 
 export default function PreviewSection() {
   const { config } = useDesignSystem()
+  const router = useRouter()
 
   const previewStyle = {
     fontFamily: config.typography.bodyFont,
@@ -43,14 +46,33 @@ export default function PreviewSection() {
     '--radius-lg': `${config.radius.large}px`,
   } as React.CSSProperties
 
+  const handleCompareWithMidnightPurple = () => {
+    // Encode current config as JSON
+    const customTheme = encodeURIComponent(JSON.stringify(config))
+    // Navigate to compare page with custom theme vs midnight-purple
+    router.push(`/compare?themeA=custom&customTheme=${customTheme}&themeB=midnight-purple`)
+  }
+
   return (
     <Box sx={previewStyle}>
-      <Typography variant="h5" gutterBottom fontWeight={600}>
-        Component Preview
-      </Typography>
-      <Typography variant="body2" color="text.secondary" paragraph>
-        See your design system in action with live component examples
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+        <Box>
+          <Typography variant="h5" gutterBottom fontWeight={600}>
+            Component Preview
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            See your design system in action with live component examples
+          </Typography>
+        </Box>
+        <Button
+          variant="outlined"
+          startIcon={<Compare />}
+          onClick={handleCompareWithMidnightPurple}
+          sx={{ flexShrink: 0, ml: 2 }}
+        >
+          Compare With Midnight Purple
+        </Button>
+      </Box>
 
       <Grid container spacing={3}>
         {/* Hero Section */}

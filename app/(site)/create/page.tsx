@@ -10,6 +10,9 @@ import {
   Paper,
   useMediaQuery,
   useTheme,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
 } from '@mui/material'
 import {
   Palette as PaletteIcon,
@@ -17,6 +20,7 @@ import {
   ViewInAr,
   Visibility,
   Code,
+  ExpandMore,
 } from '@mui/icons-material'
 import PaletteSection from '@/components/create/PaletteSection'
 import TypographySection from '@/components/create/TypographySection'
@@ -72,6 +76,59 @@ export default function CreatePage() {
 
           {/* Project Manager */}
           <ProjectManager />
+
+          {/* How It Works Accordion */}
+          <Accordion
+            sx={{
+              bgcolor: 'background.paper',
+              mt: 3,
+              borderRadius: 1,
+              '&:before': { display: 'none' },
+              boxShadow: 1,
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              aria-controls="how-it-works-content"
+              id="how-it-works-header"
+            >
+              <Typography variant="h6" fontWeight={600}>
+                How It Works
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography variant="body1" color="text.secondary" paragraph>
+                Crow Create is a front-end design system helper that runs entirely in your browser.
+                Configure your design tokens across five sections:
+              </Typography>
+              <Box component="ul" sx={{ color: 'text.secondary', mt: 1 }}>
+                <li>
+                  <strong>Palette & Accessibility:</strong> Build color palettes, check WCAG contrast
+                  ratios, and simulate colorblind modes
+                </li>
+                <li>
+                  <strong>Typography:</strong> Select fonts, configure scales, and get intelligent
+                  pairing suggestions
+                </li>
+                <li>
+                  <strong>Layout & Style:</strong> Define spacing, border radius, shadows, and motion
+                  systems
+                </li>
+                <li>
+                  <strong>Preview:</strong> See your design system in action with live component
+                  examples
+                </li>
+                <li>
+                  <strong>Exports:</strong> Copy ready-to-use code for MUI, Tailwind, CSS variables,
+                  and design tokens
+                </li>
+              </Box>
+              <Typography variant="body1" color="text.secondary" sx={{ mt: 2 }}>
+                Save your projects locally, or share them with others using shareable URLs. No account
+                or backend required.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         </Box>
 
         {/* Main Playground */}
@@ -140,43 +197,6 @@ export default function CreatePage() {
             </TabPanel>
           </Box>
         </Paper>
-
-        {/* How it works */}
-        <Box sx={{ mt: 6, maxWidth: '800px' }}>
-          <Typography variant="h4" gutterBottom fontWeight={600}>
-            How It Works
-          </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph>
-            Crow Create is a front-end design system helper that runs entirely in your browser.
-            Configure your design tokens across five sections:
-          </Typography>
-          <Box component="ul" sx={{ color: 'text.secondary' }}>
-            <li>
-              <strong>Palette & Accessibility:</strong> Build color palettes, check WCAG contrast
-              ratios, and simulate colorblind modes
-            </li>
-            <li>
-              <strong>Typography:</strong> Select fonts, configure scales, and get intelligent
-              pairing suggestions
-            </li>
-            <li>
-              <strong>Layout & Style:</strong> Define spacing, border radius, shadows, and motion
-              systems
-            </li>
-            <li>
-              <strong>Preview:</strong> See your design system in action with live component
-              examples
-            </li>
-            <li>
-              <strong>Exports:</strong> Copy ready-to-use code for MUI, Tailwind, CSS variables,
-              and design tokens
-            </li>
-          </Box>
-          <Typography variant="body1" color="text.secondary" paragraph sx={{ mt: 2 }}>
-            Save your projects locally, or share them with others using shareable URLs. No account
-            or backend required.
-          </Typography>
-        </Box>
       </Container>
     </Box>
   )

@@ -17,28 +17,38 @@ import { useDesignSystem } from '@/context/DesignSystemContext'
 
 const AVAILABLE_FONTS = [
   'Inter',
+  'Inter Tight',
   'Roboto',
   'Open Sans',
   'Lato',
   'Montserrat',
+  'Lexend',
+  'Source Sans 3',
+  'Figtree',
   'Playfair Display',
   'Merriweather',
   'Source Serif Pro',
   'Sora',
   'Space Grotesk',
+  'JetBrains Mono',
 ]
 
 const FONT_PAIRINGS: Record<string, string[]> = {
   Inter: ['Playfair Display', 'Merriweather', 'Source Serif Pro'],
+  'Inter Tight': ['Playfair Display', 'Merriweather', 'Source Serif Pro'],
   Roboto: ['Playfair Display', 'Merriweather', 'Lato'],
   'Open Sans': ['Playfair Display', 'Merriweather', 'Montserrat'],
   Lato: ['Playfair Display', 'Merriweather', 'Roboto'],
   Montserrat: ['Merriweather', 'Source Serif Pro', 'Open Sans'],
-  'Playfair Display': ['Inter', 'Roboto', 'Lato'],
-  Merriweather: ['Inter', 'Roboto', 'Montserrat'],
+  Lexend: ['Playfair Display', 'Merriweather', 'Source Serif Pro'],
+  'Source Sans 3': ['Playfair Display', 'Merriweather', 'Source Serif Pro'],
+  Figtree: ['Playfair Display', 'Merriweather', 'Source Serif Pro'],
+  'Playfair Display': ['Inter', 'Roboto', 'Lato', 'Lexend', 'Figtree'],
+  Merriweather: ['Inter', 'Roboto', 'Montserrat', 'Inter Tight', 'Source Sans 3'],
   'Source Serif Pro': ['Inter', 'Montserrat', 'Space Grotesk'],
   Sora: ['Playfair Display', 'Merriweather', 'Inter'],
   'Space Grotesk': ['Source Serif Pro', 'Merriweather', 'Inter'],
+  'JetBrains Mono': ['Inter', 'Roboto', 'Source Sans 3'],
 }
 
 export default function TypographySection() {

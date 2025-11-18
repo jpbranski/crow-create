@@ -30,15 +30,64 @@ export default function ComparePage() {
 
   // Load theme from URL on mount
   useEffect(() => {
-    const themeParam = searchParams.get('theme')
-    if (themeParam) {
-      const theme = getThemeById(themeParam)
+    const themeAParam = searchParams.get('themeA')
+    const themeBParam = searchParams.get('themeB')
+    const customThemeParam = searchParams.get('customTheme')
+
+    // Handle theme A
+    if (themeAParam === 'custom' && customThemeParam) {
+      try {
+        const customConfig = JSON.parse(decodeURIComponent(customThemeParam))
+        // Convert custom config to CuratedTheme format
+        const customTheme: CuratedTheme = {
+          id: 'custom',
+          name: 'Custom',
+          description: 'Your custom design system',
+          wcagLevel: 'AA',
+          palette: {
+            primary: customConfig.palette.primary,
+            secondary: customConfig.palette.secondary,
+            background: customConfig.palette.background,
+            surface: customConfig.palette.surface,
+            text: customConfig.palette.textPrimary,
+            textSecondary: customConfig.palette.textSecondary,
+          },
+        }
+        setThemeA(customTheme)
+      } catch (error) {
+        console.error('Failed to parse custom theme:', error)
+        setThemeA(curatedThemes[0])
+      }
+    } else if (themeAParam) {
+      const theme = getThemeById(themeAParam)
       if (theme) {
         setThemeA(theme)
+      } else {
+        setThemeA(curatedThemes[0])
+      }
+    } else {
+      const themeParam = searchParams.get('theme')
+      if (themeParam) {
+        const theme = getThemeById(themeParam)
+        if (theme) {
+          setThemeA(theme)
+        } else {
+          setThemeA(curatedThemes[0])
+        }
+      } else {
+        setThemeA(curatedThemes[0])
+      }
+    }
+
+    // Handle theme B
+    if (themeBParam) {
+      const theme = getThemeById(themeBParam)
+      if (theme) {
+        setThemeB(theme)
+      } else {
         setThemeB(curatedThemes[0])
       }
     } else {
-      setThemeA(curatedThemes[0])
       setThemeB(curatedThemes[1])
     }
   }, [searchParams])
@@ -52,6 +101,22 @@ export default function ComparePage() {
   }
 
   const handleApplyTheme = (theme: CuratedTheme) => {
+    // If it's a custom theme coming from the compare button, use the config from URL
+    if (theme.id === 'custom') {
+      const customThemeParam = searchParams.get('customTheme')
+      if (customThemeParam) {
+        try {
+          const customConfig = JSON.parse(decodeURIComponent(customThemeParam))
+          loadConfig(customConfig)
+          router.push('/create')
+          return
+        } catch (error) {
+          console.error('Failed to load custom theme:', error)
+        }
+      }
+    }
+
+    // Otherwise convert curated theme to config
     const fullConfig = {
       palette: {
         primary: theme.palette.primary,
@@ -146,7 +211,11 @@ export default function ComparePage() {
                     const theme = getThemeById(e.target.value)
                     if (theme) setThemeA(theme)
                   }}
+                  disabled={themeA.id === 'custom'}
                 >
+                  {themeA.id === 'custom' && (
+                    <MenuItem value="custom">Custom</MenuItem>
+                  )}
                   {curatedThemes.map((theme) => (
                     <MenuItem key={theme.id} value={theme.id}>
                       {theme.name}
@@ -160,6 +229,7 @@ export default function ComparePage() {
                   size="small"
                   startIcon={<Shuffle />}
                   onClick={handleRandomizeA}
+                  disabled={themeA.id === 'custom'}
                   fullWidth
                 >
                   Random

@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   Link as MuiLink,
-  Chip,
 } from '@mui/material'
 import {
   Palette,
@@ -281,29 +280,9 @@ export default function ResourcesPage() {
                       }}
                     >
                       <CardContent sx={{ flexGrow: 1 }}>
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'flex-start',
-                            mb: 1,
-                          }}
-                        >
-                          <Typography variant="h6" component="h3" fontWeight={600}>
-                            {resource.name}
-                          </Typography>
-                          {resource.isAffiliate && (
-                            <Chip
-                              label="Affiliate"
-                              size="small"
-                              sx={{
-                                fontSize: '0.65rem',
-                                height: 20,
-                                bgcolor: 'action.selected',
-                              }}
-                            />
-                          )}
-                        </Box>
+                        <Typography variant="h6" component="h3" fontWeight={600} gutterBottom>
+                          {resource.name}
+                        </Typography>
                         <Typography variant="body2" color="text.secondary" paragraph>
                           {resource.description}
                         </Typography>
