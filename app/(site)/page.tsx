@@ -298,7 +298,7 @@ export default function AboutPage() {
       {/* Why Section */}
       <Box
         sx={{
-          bgcolor: theme.palette.mode === 'dark' ? 'grey.900' : 'grey.50',
+          bgcolor: (theme) => theme.palette.background.default,
           py: { xs: 8, md: 12 },
         }}
       >
