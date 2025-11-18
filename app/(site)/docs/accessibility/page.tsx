@@ -105,7 +105,7 @@ export default function AccessibilityPage() {
         </Typography>
       </Box>
 
-      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'grey.50' }}>
+      <Paper sx={{ p: 3, my: 3, borderRadius: 2, bgcolor: 'background.paper' }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Interpreting Results
         </Typography>

@@ -14,13 +14,31 @@ import {
   CardContent,
   Button,
   Chip,
+  Divider,
 } from '@mui/material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import { generateShadowWithColor } from '@/lib/colorUtils'
 import ColorPicker from './ColorPicker'
+import CodeBlock from '../CodeBlock'
 
 export default function LayoutSection() {
   const { config, updateSpacing, updateRadius, updateShadows, updateMotion } = useDesignSystem()
+
+  const applyShadowOffset = (shadow: string, offsetX: number, offsetY: number): string => {
+    // Parse and apply offsets to shadow values
+    return shadow.split(',').map(s => {
+      const trimmed = s.trim()
+      const parts = trimmed.split(' ')
+      if (parts.length >= 4) {
+        const currentX = parseFloat(parts[0])
+        const currentY = parseFloat(parts[1])
+        const newX = currentX + offsetX
+        const newY = currentY + offsetY
+        return `${newX}px ${newY}px ${parts.slice(2).join(' ')}`
+      }
+      return s
+    }).join(', ')
+  }
 
   const handleShadowColorChange = (color: string) => {
     // Generate new shadows with the new color
@@ -33,10 +51,28 @@ export default function LayoutSection() {
 
     updateShadows({
       color,
-      sm: generateShadowWithColor(baseShadows.sm, color),
-      md: generateShadowWithColor(baseShadows.md, color),
-      lg: generateShadowWithColor(baseShadows.lg, color),
-      xl: generateShadowWithColor(baseShadows.xl, color),
+      sm: applyShadowOffset(generateShadowWithColor(baseShadows.sm, color), config.shadows.offsetX, config.shadows.offsetY),
+      md: applyShadowOffset(generateShadowWithColor(baseShadows.md, color), config.shadows.offsetX, config.shadows.offsetY),
+      lg: applyShadowOffset(generateShadowWithColor(baseShadows.lg, color), config.shadows.offsetX, config.shadows.offsetY),
+      xl: applyShadowOffset(generateShadowWithColor(baseShadows.xl, color), config.shadows.offsetX, config.shadows.offsetY),
+    })
+  }
+
+  const handleOffsetChange = (offsetX: number, offsetY: number) => {
+    const baseShadows = {
+      sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+      lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+      xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+    }
+
+    updateShadows({
+      offsetX,
+      offsetY,
+      sm: applyShadowOffset(generateShadowWithColor(baseShadows.sm, config.shadows.color), offsetX, offsetY),
+      md: applyShadowOffset(generateShadowWithColor(baseShadows.md, config.shadows.color), offsetX, offsetY),
+      lg: applyShadowOffset(generateShadowWithColor(baseShadows.lg, config.shadows.color), offsetX, offsetY),
+      xl: applyShadowOffset(generateShadowWithColor(baseShadows.xl, config.shadows.color), offsetX, offsetY),
     })
   }
 
@@ -200,66 +236,196 @@ export default function LayoutSection() {
               Elevation levels for depth and hierarchy
             </Typography>
 
-            <Box sx={{ mb: 3 }}>
-              <ColorPicker
-                label="Shadow Color"
-                value={config.shadows.color}
-                onChange={handleShadowColorChange}
-              />
-            </Box>
+            <Grid container spacing={3} sx={{ mb: 3 }}>
+              <Grid item xs={12} md={4}>
+                <ColorPicker
+                  label="Shadow Color"
+                  value={config.shadows.color}
+                  onChange={handleShadowColorChange}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+                  Offset X: {config.shadows.offsetX}px
+                </Typography>
+                <Slider
+                  value={config.shadows.offsetX}
+                  onChange={(_e, value) => handleOffsetChange(value as number, config.shadows.offsetY)}
+                  min={-20}
+                  max={20}
+                  step={1}
+                  marks={[
+                    { value: -20, label: '-20' },
+                    { value: 0, label: '0' },
+                    { value: 20, label: '20' },
+                  ]}
+                  valueLabelDisplay="auto"
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Typography variant="caption" color="text.secondary" gutterBottom display="block">
+                  Offset Y: {config.shadows.offsetY}px
+                </Typography>
+                <Slider
+                  value={config.shadows.offsetY}
+                  onChange={(_e, value) => handleOffsetChange(config.shadows.offsetX, value as number)}
+                  min={-20}
+                  max={20}
+                  step={1}
+                  marks={[
+                    { value: -20, label: '-20' },
+                    { value: 0, label: '0' },
+                    { value: 20, label: '20' },
+                  ]}
+                  valueLabelDisplay="auto"
+                />
+              </Grid>
+            </Grid>
 
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6} md={3}>
-                <Card
-                  sx={{
-                    height: 120,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: config.shadows.sm,
-                  }}
-                >
-                  <Typography variant="caption">Small</Typography>
-                </Card>
+                <Box>
+                  <Card
+                    sx={{
+                      height: 120,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: config.shadows.sm,
+                      mb: 1,
+                    }}
+                  >
+                    <Typography variant="caption" fontWeight={600}>Small</Typography>
+                  </Card>
+                  <Box sx={{ mt: 1 }}>
+                    <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 0.5 }}>
+                      CSS:
+                    </Typography>
+                    <Box
+                      sx={{
+                        p: 1,
+                        bgcolor: '#0D1117',
+                        borderRadius: 1,
+                        fontFamily: 'var(--font-jetbrains-mono), monospace',
+                        fontSize: '0.7rem',
+                        color: '#F3F4F6',
+                        overflowX: 'auto',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all',
+                      }}
+                    >
+                      box-shadow: {config.shadows.sm};
+                    </Box>
+                  </Box>
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Card
-                  sx={{
-                    height: 120,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: config.shadows.md,
-                  }}
-                >
-                  <Typography variant="caption">Medium</Typography>
-                </Card>
+                <Box>
+                  <Card
+                    sx={{
+                      height: 120,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: config.shadows.md,
+                      mb: 1,
+                    }}
+                  >
+                    <Typography variant="caption" fontWeight={600}>Medium</Typography>
+                  </Card>
+                  <Box sx={{ mt: 1 }}>
+                    <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 0.5 }}>
+                      CSS:
+                    </Typography>
+                    <Box
+                      sx={{
+                        p: 1,
+                        bgcolor: '#0D1117',
+                        borderRadius: 1,
+                        fontFamily: 'var(--font-jetbrains-mono), monospace',
+                        fontSize: '0.7rem',
+                        color: '#F3F4F6',
+                        overflowX: 'auto',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all',
+                      }}
+                    >
+                      box-shadow: {config.shadows.md};
+                    </Box>
+                  </Box>
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Card
-                  sx={{
-                    height: 120,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: config.shadows.lg,
-                  }}
-                >
-                  <Typography variant="caption">Large</Typography>
-                </Card>
+                <Box>
+                  <Card
+                    sx={{
+                      height: 120,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: config.shadows.lg,
+                      mb: 1,
+                    }}
+                  >
+                    <Typography variant="caption" fontWeight={600}>Large</Typography>
+                  </Card>
+                  <Box sx={{ mt: 1 }}>
+                    <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 0.5 }}>
+                      CSS:
+                    </Typography>
+                    <Box
+                      sx={{
+                        p: 1,
+                        bgcolor: '#0D1117',
+                        borderRadius: 1,
+                        fontFamily: 'var(--font-jetbrains-mono), monospace',
+                        fontSize: '0.7rem',
+                        color: '#F3F4F6',
+                        overflowX: 'auto',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all',
+                      }}
+                    >
+                      box-shadow: {config.shadows.lg};
+                    </Box>
+                  </Box>
+                </Box>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Card
-                  sx={{
-                    height: 120,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    boxShadow: config.shadows.xl,
-                  }}
-                >
-                  <Typography variant="caption">Extra Large</Typography>
-                </Card>
+                <Box>
+                  <Card
+                    sx={{
+                      height: 120,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: config.shadows.xl,
+                      mb: 1,
+                    }}
+                  >
+                    <Typography variant="caption" fontWeight={600}>Extra Large</Typography>
+                  </Card>
+                  <Box sx={{ mt: 1 }}>
+                    <Typography variant="caption" color="text.secondary" gutterBottom display="block" sx={{ mb: 0.5 }}>
+                      CSS:
+                    </Typography>
+                    <Box
+                      sx={{
+                        p: 1,
+                        bgcolor: '#0D1117',
+                        borderRadius: 1,
+                        fontFamily: 'var(--font-jetbrains-mono), monospace',
+                        fontSize: '0.7rem',
+                        color: '#F3F4F6',
+                        overflowX: 'auto',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-all',
+                      }}
+                    >
+                      box-shadow: {config.shadows.xl};
+                    </Box>
+                  </Box>
+                </Box>
               </Grid>
             </Grid>
           </Paper>
