@@ -1,8 +1,8 @@
 'use client'
 
-import { Container, Box, Typography, Paper, Link as MuiLink } from '@mui/material'
+import { Container, Box, Typography, Paper, Link as MuiLink, Button } from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
-import { Email, GitHub, LinkedIn } from '@mui/icons-material'
+import { Email, GitHub, LinkedIn, Favorite } from '@mui/icons-material'
 
 export default function ContactPage() {
   return (
@@ -205,6 +205,45 @@ export default function ContactPage() {
             everyone.
           </Typography>
         </Paper>
+
+        {/* Support the Developer */}
+        <Box sx={{ textAlign: 'center', mt: 6 }}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            startIcon={<Favorite />}
+            href="https://www.patreon.com/jpthepirate"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              px: 4,
+              py: 1.5,
+              fontSize: '1.1rem',
+              fontWeight: 600,
+              boxShadow: 3,
+              '&:hover': {
+                boxShadow: 6,
+                transform: 'translateY(-2px)',
+              },
+              transition: 'all 0.3s ease',
+            }}
+          >
+            Support the Developer
+          </Button>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              mt: 2,
+              fontStyle: 'italic',
+              maxWidth: '500px',
+              mx: 'auto',
+            }}
+          >
+            Your support helps keep Crow Create free and accessible for everyone.
+          </Typography>
+        </Box>
       </Container>
     </Box>
   )

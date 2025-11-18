@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import {
   Box,
   Grid,
@@ -16,6 +17,7 @@ import {
   Chip,
   Divider,
 } from '@mui/material'
+import { PlayArrow } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import { generateShadowWithColor } from '@/lib/colorUtils'
 import ColorPicker from './ColorPicker'
@@ -23,6 +25,7 @@ import CodeBlock from '../CodeBlock'
 
 export default function LayoutSection() {
   const { config, updateSpacing, updateRadius, updateShadows, updateMotion } = useDesignSystem()
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const applyShadowOffset = (shadow: string, offsetX: number, offsetY: number): string => {
     // Parse and apply offsets to shadow values
@@ -284,7 +287,16 @@ export default function LayoutSection() {
 
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6} md={3}>
-                <Box>
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: (theme) =>
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255, 255, 255, 0.04)'
+                        : 'rgba(0, 0, 0, 0.03)',
+                  }}
+                >
                   <Card
                     sx={{
                       height: 120,
@@ -320,7 +332,16 @@ export default function LayoutSection() {
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Box>
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: (theme) =>
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255, 255, 255, 0.04)'
+                        : 'rgba(0, 0, 0, 0.03)',
+                  }}
+                >
                   <Card
                     sx={{
                       height: 120,
@@ -356,7 +377,16 @@ export default function LayoutSection() {
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Box>
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: (theme) =>
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255, 255, 255, 0.04)'
+                        : 'rgba(0, 0, 0, 0.03)',
+                  }}
+                >
                   <Card
                     sx={{
                       height: 120,
@@ -392,7 +422,16 @@ export default function LayoutSection() {
                 </Box>
               </Grid>
               <Grid item xs={12} sm={6} md={3}>
-                <Box>
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: (theme) =>
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255, 255, 255, 0.04)'
+                        : 'rgba(0, 0, 0, 0.03)',
+                  }}
+                >
                   <Card
                     sx={{
                       height: 120,
@@ -496,6 +535,62 @@ export default function LayoutSection() {
               <Typography variant="caption" color="text.secondary" gutterBottom display="block">
                 Easing: {config.motion.easing}
               </Typography>
+            </Box>
+
+            <Divider sx={{ my: 3 }} />
+
+            {/* Motion Preview */}
+            <Box>
+              <Typography variant="subtitle1" fontWeight={600} gutterBottom>
+                Live Motion Preview
+              </Typography>
+              <Typography variant="body2" color="text.secondary" paragraph>
+                See how your motion settings feel in practice
+              </Typography>
+
+              <Box sx={{ display: 'flex', gap: 3, flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+                <Button
+                  variant="contained"
+                  startIcon={<PlayArrow />}
+                  onClick={() => {
+                    setIsAnimating(true)
+                    setTimeout(() => setIsAnimating(false), config.motion.duration.normal)
+                  }}
+                >
+                  Preview Motion
+                </Button>
+
+                <Box
+                  sx={{
+                    width: 120,
+                    height: 120,
+                    bgcolor: 'primary.main',
+                    borderRadius: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'primary.contrastText',
+                    fontWeight: 600,
+                    boxShadow: config.shadows.md,
+                    transform: isAnimating ? 'scale(1.2) rotate(5deg)' : 'scale(1) rotate(0deg)',
+                    transition: `all ${config.motion.duration.normal}ms ${config.motion.easing}`,
+                  }}
+                >
+                  Demo
+                </Box>
+
+                <Box sx={{ flex: 1, minWidth: 200 }}>
+                  <Typography variant="caption" color="text.secondary" display="block" gutterBottom>
+                    Current Settings:
+                  </Typography>
+                  <Typography variant="caption" display="block">
+                    Duration: {config.motion.duration.normal}ms
+                  </Typography>
+                  <Typography variant="caption" display="block">
+                    Easing: {config.motion.easing}
+                  </Typography>
+                </Box>
+              </Box>
             </Box>
           </Paper>
         </Grid>

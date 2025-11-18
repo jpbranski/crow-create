@@ -79,6 +79,9 @@ export default function Header() {
             <Button component={Link} href="/resources" color="inherit">
               Resources
             </Button>
+            <Button component={Link} href="/contact" color="inherit">
+              Contact
+            </Button>
           </Box>
         )}
 
@@ -135,6 +138,15 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <ListItemText primary="Resources" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                component={Link}
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <ListItemText primary="Contact" />
               </ListItemButton>
             </ListItem>
           </List>
