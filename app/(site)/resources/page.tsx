@@ -24,7 +24,6 @@ interface Resource {
   description: string
   url: string
   category: string
-  isAffiliate?: boolean
 }
 
 const resources: Resource[] = [
@@ -34,7 +33,6 @@ const resources: Resource[] = [
     description: 'Collaborative interface design tool with powerful prototyping',
     url: 'https://figma.com',
     category: 'Design Tools',
-    isAffiliate: true,
   },
   {
     name: 'Material-UI (MUI)',
@@ -59,7 +57,6 @@ const resources: Resource[] = [
     description: 'Professional digital design toolkit for Mac',
     url: 'https://sketch.com',
     category: 'Design Tools',
-    isAffiliate: true,
   },
   {
     name: 'Adobe XD',
@@ -176,7 +173,6 @@ const resources: Resource[] = [
     description: 'Platform for deploying and hosting modern web apps',
     url: 'https://vercel.com',
     category: 'Developer Tools',
-    isAffiliate: true,
   },
   {
     name: 'GitHub',
@@ -289,7 +285,7 @@ export default function ResourcesPage() {
                         <MuiLink
                           href={resource.url}
                           target="_blank"
-                          rel={resource.isAffiliate ? 'noopener noreferrer sponsored' : 'noopener noreferrer'}
+                          rel="noopener noreferrer"
                           sx={{
                             color: 'primary.main',
                             textDecoration: 'none',
