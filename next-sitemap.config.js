@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://crowcreate.vercel.app',
+  siteUrl: process.env.SITE_URL || 'https://www.crowcreateapp.com',
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
@@ -12,4 +12,4 @@ module.exports = {
   },
   exclude: ['/api/*'],
   generateIndexSitemap: false,
-}
+};
