@@ -1,9 +1,4 @@
-# *
 User-agent: *
 Allow: /
 
-# Host
-Host: https://crowcreate.vercel.app
-
-# Sitemaps
-Sitemap: https://crowcreate.vercel.app/sitemap.xml
+Sitemap: https://www.crowcreateapp.com/sitemap.xml
