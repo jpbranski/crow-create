@@ -225,12 +225,16 @@ export default function GettingStartedPage() {
       </Box>
 
       <Box sx={{ mt: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-        <Button variant="contained" size="large" component={Link} href="/create">
-          Start Creating
-        </Button>
-        <Button variant="outlined" size="large" component={Link} href="/docs/palette">
-          Learn About Palettes
-        </Button>
+        <Link href="/create" passHref legacyBehavior>
+          <Button variant="contained" size="large" component="a">
+            Start Creating
+          </Button>
+        </Link>
+        <Link href="/docs/palette" passHref legacyBehavior>
+          <Button variant="outlined" size="large" component="a">
+            Learn About Palettes
+          </Button>
+        </Link>
       </Box>
     </Box>
   )
