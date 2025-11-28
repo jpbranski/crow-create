@@ -54,7 +54,7 @@ export default function ShadowsDepthPage() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50] })}>
+            <TableRow sx={{ bgcolor: 'grey.50' }}>
               <TableCell>0dp</TableCell>
               <TableCell>Base surface</TableCell>
               <TableCell>Page background, no elevation</TableCell>
@@ -64,7 +64,7 @@ export default function ShadowsDepthPage() {
               <TableCell>Cards, Search bars</TableCell>
               <TableCell>Slightly elevated content containers</TableCell>
             </TableRow>
-            <TableRow sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50] })}>
+            <TableRow sx={{ bgcolor: 'grey.50' }}>
               <TableCell>2dp</TableCell>
               <TableCell>Raised buttons (resting)</TableCell>
               <TableCell>Interactive elements at rest</TableCell>
@@ -74,7 +74,7 @@ export default function ShadowsDepthPage() {
               <TableCell>Refresh indicators, FAB (resting)</TableCell>
               <TableCell>Prominent interactive elements</TableCell>
             </TableRow>
-            <TableRow sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50] })}>
+            <TableRow sx={{ bgcolor: 'grey.50' }}>
               <TableCell>4dp</TableCell>
               <TableCell>App bar</TableCell>
               <TableCell>Primary navigation and headers</TableCell>
@@ -84,7 +84,7 @@ export default function ShadowsDepthPage() {
               <TableCell>Snackbar</TableCell>
               <TableCell>Temporary notifications</TableCell>
             </TableRow>
-            <TableRow sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50] })}>
+            <TableRow sx={{ bgcolor: 'grey.50' }}>
               <TableCell>8dp</TableCell>
               <TableCell>Buttons (pressed), FAB (pressed), Menu</TableCell>
               <TableCell>Active states, dropdown menus</TableCell>
@@ -94,7 +94,7 @@ export default function ShadowsDepthPage() {
               <TableCell>Raised button (pressed)</TableCell>
               <TableCell>Active button states</TableCell>
             </TableRow>
-            <TableRow sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50] })}>
+            <TableRow sx={{ bgcolor: 'grey.50' }}>
               <TableCell>16dp</TableCell>
               <TableCell>Navigation drawer, Modal bottom sheet</TableCell>
               <TableCell>Major overlays</TableCell>
@@ -123,7 +123,7 @@ export default function ShadowsDepthPage() {
         <Typography variant="h6" gutterBottom fontWeight={600}>
           CSS Box Shadow Syntax
         </Typography>
-        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', mb: 2, fontSize: '0.9rem' })}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', mb: 2, fontSize: '0.9rem' }}>
           box-shadow: [offset-x] [offset-y] [blur-radius] [spread-radius] [color];
         </Box>
 
@@ -172,7 +172,7 @@ export default function ShadowsDepthPage() {
         </Typography>
       </Box>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Example: Material Design Elevation 4dp
         </Typography>
@@ -281,21 +281,21 @@ export default function ShadowsDepthPage() {
 
         <Box sx={{ mb: 3 }}>
           <Typography variant="subtitle1" fontWeight={600}>Hard Shadow</Typography>
-          <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' })}>
+          <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' }}>
             box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
           </Box>
         </Box>
 
         <Box sx={{ mb: 3 }}>
           <Typography variant="subtitle1" fontWeight={600}>Soft Shadow (Typical)</Typography>
-          <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' })}>
+          <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' }}>
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.12);
           </Box>
         </Box>
 
         <Box>
           <Typography variant="subtitle1" fontWeight={600}>Diffuse Shadow</Typography>
-          <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' })}>
+          <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' }}>
             box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.08);
           </Box>
         </Box>
@@ -363,7 +363,7 @@ export default function ShadowsDepthPage() {
         </Typography>
       </Box>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Example: Input Field with Inner Shadow
         </Typography>

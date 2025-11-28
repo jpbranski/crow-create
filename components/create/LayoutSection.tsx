@@ -291,10 +291,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -314,21 +311,17 @@ export default function LayoutSection() {
                       CSS:
                     </Typography>
                     <Box
-                      sx={(theme) => ({
+                      sx={{
                         p: 1,
-                        bgcolor: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[900]
-                          : theme.palette.grey[100],
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[100]
-                          : theme.palette.grey[900],
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
-                      })}
+                      }}
                     >
                       box-shadow: {config.shadows.sm};
                     </Box>
@@ -340,10 +333,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -363,21 +353,17 @@ export default function LayoutSection() {
                       CSS:
                     </Typography>
                     <Box
-                      sx={(theme) => ({
+                      sx={{
                         p: 1,
-                        bgcolor: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[900]
-                          : theme.palette.grey[100],
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[100]
-                          : theme.palette.grey[900],
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
-                      })}
+                      }}
                     >
                       box-shadow: {config.shadows.md};
                     </Box>
@@ -389,10 +375,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -412,21 +395,17 @@ export default function LayoutSection() {
                       CSS:
                     </Typography>
                     <Box
-                      sx={(theme) => ({
+                      sx={{
                         p: 1,
-                        bgcolor: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[900]
-                          : theme.palette.grey[100],
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[100]
-                          : theme.palette.grey[900],
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
-                      })}
+                      }}
                     >
                       box-shadow: {config.shadows.lg};
                     </Box>
@@ -438,10 +417,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -461,21 +437,17 @@ export default function LayoutSection() {
                       CSS:
                     </Typography>
                     <Box
-                      sx={(theme) => ({
+                      sx={{
                         p: 1,
-                        bgcolor: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[900]
-                          : theme.palette.grey[100],
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: theme.palette.mode === 'dark'
-                          ? theme.palette.grey[100]
-                          : theme.palette.grey[900],
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
-                      })}
+                      }}
                     >
                       box-shadow: {config.shadows.xl};
                     </Box>

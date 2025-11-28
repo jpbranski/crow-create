@@ -30,7 +30,7 @@ export default function MaterialUIThemingPage() {
         A Material UI theme is a JavaScript object that defines your application's design tokens. It includes palette (colors), typography, spacing, breakpoints, shadows, and component-specific customizations.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Basic Theme Structure
         </Typography>
@@ -53,7 +53,7 @@ export default function MaterialUIThemingPage() {
         The createTheme() function is the entry point for creating custom MUI themes. It accepts your custom configuration and returns a complete theme object with all necessary properties.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Creating a Custom Theme
         </Typography>
@@ -102,7 +102,7 @@ function App() {
         Each color in MUI's palette can be defined with multiple shades and a contrast text color.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`palette: {
   primary: {
@@ -141,7 +141,7 @@ function App() {
         If you only provide the main color, MUI automatically generates light, dark, and contrastText values using its color manipulation utilities.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`import { createTheme } from '@mui/material/styles';
 
@@ -162,7 +162,7 @@ theme.palette.primary.dark  // Auto-generated`}
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Background and Text Colors
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`palette: {
   mode: 'light', // or 'dark'
@@ -187,7 +187,7 @@ theme.palette.primary.dark  // Auto-generated`}
         MUI's typography system provides 13 predefined text variants, each with configurable font family, size, weight, and line height.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Typography Configuration
         </Typography>
@@ -232,7 +232,7 @@ theme.palette.primary.dark  // Auto-generated`}
         Use the theme.breakpoints helper to create responsive typography that scales across screen sizes.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`typography: {
   h1: {
@@ -252,7 +252,7 @@ theme.palette.primary.dark  // Auto-generated`}
         MUI uses a spacing function based on a spacing unit (default 8px). This creates a consistent rhythm throughout your UI.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`const theme = createTheme({
   spacing: 8, // Base unit
@@ -276,7 +276,7 @@ sx={{
         MUI provides five default breakpoints for responsive design. You can customize these to match your design system.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`breakpoints: {
   values: {
@@ -308,7 +308,7 @@ sx={{
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Default Props
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`components: {
   MuiButton: {
@@ -330,7 +330,7 @@ sx={{
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Style Overrides
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`components: {
   MuiButton: {
@@ -367,7 +367,7 @@ sx={{
         MUI makes it easy to support light and dark modes by simply changing the palette mode.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Implementing Dark Mode
         </Typography>
@@ -421,7 +421,7 @@ function App() {
         Here's a comprehensive example combining all theming concepts:
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.75rem', whiteSpace: 'pre', overflow: 'auto', maxHeight: '500px' }}>
 {`import { createTheme } from '@mui/material/styles';
 

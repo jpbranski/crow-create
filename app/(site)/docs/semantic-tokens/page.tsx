@@ -115,7 +115,7 @@ export default function SemanticTokensPage() {
         <Typography variant="body1" paragraph>
           Most semantic token names follow this pattern:
         </Typography>
-        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', mb: 2 })}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', mb: 2 }}>
           [category]-[type]-[variant]-[state]
         </Box>
 
@@ -428,7 +428,7 @@ export default function SemanticTokensPage() {
         Semantic tokens typically reference raw tokens as their values. This creates a two-tier system:
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Example Token Structure (CSS Variables):
         </Typography>

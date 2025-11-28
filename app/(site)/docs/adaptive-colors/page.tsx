@@ -78,7 +78,7 @@ export default function AdaptiveColorsPage() {
         </Box>
       </Paper>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Adaptive Color Example: Primary Button
         </Typography>
@@ -109,7 +109,7 @@ export default function AdaptiveColorsPage() {
         Some systems adapt based on ambient light sensors (common on mobile devices) or time of day.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Detecting User Preference with prefers-color-scheme
         </Typography>
@@ -191,7 +191,7 @@ export default function AdaptiveColorsPage() {
         </Table>
       </TableContainer>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Adaptive Button States Example
         </Typography>
@@ -265,7 +265,7 @@ export default function AdaptiveColorsPage() {
         </li>
       </Box>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Responsive Color Adaptation Example
         </Typography>
@@ -331,7 +331,7 @@ export default function AdaptiveColorsPage() {
         </Table>
       </TableContainer>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           High Contrast Mode Support
         </Typography>
@@ -379,7 +379,7 @@ export default function AdaptiveColorsPage() {
         The same semantic color may need different values when placed on different background colors to maintain WCAG contrast.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Adaptive Text Colors Based on Background
         </Typography>
@@ -422,7 +422,7 @@ export default function AdaptiveColorsPage() {
         Advanced adaptive systems can compute colors dynamically using JavaScript and CSS custom properties.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           JavaScript-Powered Color Adaptation
         </Typography>

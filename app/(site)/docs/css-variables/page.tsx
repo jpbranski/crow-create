@@ -30,7 +30,7 @@ export default function CSSVariablesPage() {
         CSS custom properties (commonly called CSS variables) are entities defined by developers that contain specific values to be reused throughout a document. They're set using custom property notation (e.g., --main-color: black;) and accessed using the var() function (e.g., color: var(--main-color);).
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Basic CSS Variable Syntax
         </Typography>
@@ -107,7 +107,7 @@ export default function CSSVariablesPage() {
 
         <Box sx={{ mb: 3 }}>
           <Typography variant="subtitle1" fontWeight={600}>1. Use Semantic Names</Typography>
-          <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', my: 1 })}>
+          <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', my: 1 }}>
 {`/* Good - Semantic */
 --color-primary: #3b82f6;
 --color-text-primary: #1f2937;
@@ -125,7 +125,7 @@ export default function CSSVariablesPage() {
           <Typography variant="body2" color="text.secondary">
             CSS variables are case-sensitive. Kebab-case (dashes) is the CSS convention.
           </Typography>
-          <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', my: 1 })}>
+          <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', my: 1 }}>
 {`/* Good */
 --primary-button-color: blue;
 
@@ -136,7 +136,7 @@ export default function CSSVariablesPage() {
 
         <Box>
           <Typography variant="subtitle1" fontWeight={600}>3. Group by Category</Typography>
-          <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', my: 1 })}>
+          <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', my: 1 }}>
 {`/* Color variables */
 --color-primary: #3b82f6;
 --color-secondary: #8b5cf6;
@@ -166,7 +166,7 @@ export default function CSSVariablesPage() {
         Define variables on :root to make them available throughout your entire document.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`:root {
   --primary-color: #3b82f6;
@@ -191,7 +191,7 @@ export default function CSSVariablesPage() {
         Define variables on specific elements to limit their scope. Child elements inherit these values.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`.card {
   --card-padding: 16px;
@@ -221,7 +221,7 @@ export default function CSSVariablesPage() {
           <Palette sx={{ mr: 1, color: 'primary.main' }} />
           Light/Dark Mode Implementation
         </Typography>
-        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' })}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`:root {
   /* Light mode (default) */
   --color-bg: #ffffff;
@@ -254,7 +254,7 @@ body {
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Multiple Theme Support
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`:root {
   --theme-primary: #3b82f6; /* Default blue */
@@ -281,7 +281,7 @@ body {
         One of the most powerful features of CSS variables is the ability to update them dynamically with JavaScript.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Reading and Writing CSS Variables
         </Typography>
@@ -303,7 +303,7 @@ card.style.setProperty('--card-padding', '32px');`}
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Practical Example: User Customization
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`// Let users customize font size
 function setFontSize(size) {
@@ -326,7 +326,7 @@ localStorage.setItem('fontSize', '18');`}
         The var() function accepts a fallback value as a second parameter, used when the variable is undefined.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Fallback Syntax
         </Typography>
@@ -401,7 +401,7 @@ localStorage.setItem('fontSize', '18');`}
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Fallback Strategy for Older Browsers
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`.button {
   /* Fallback for browsers without CSS variable support */
@@ -421,7 +421,7 @@ localStorage.setItem('fontSize', '18');`}
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Using calc() with Variables
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`:root {
   --spacing-unit: 8px;
@@ -444,7 +444,7 @@ localStorage.setItem('fontSize', '18');`}
       <Typography variant="body1" paragraph>
         Store RGB values separately to enable runtime color manipulation.
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`:root {
   /* Store RGB channels separately */
@@ -480,7 +480,7 @@ localStorage.setItem('fontSize', '18');`}
       <Typography variant="body1" paragraph>
         Change variable values based on media queries for responsive design.
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 2, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre' }}>
 {`:root {
   --container-padding: 16px;

@@ -47,7 +47,7 @@ export default function ExportingPage() {
           Ready-to-use Material-UI v5/v6 theme configuration. Simply import into your app and pass
           to the ThemeProvider component.
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={(theme) => ({ fontFamily: 'monospace', bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 1, borderRadius: 1 })}>
+        <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace', bgcolor: 'grey.100', p: 1, borderRadius: 1 }}>
           import &#123; createTheme &#125; from '@mui/material/styles'
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
@@ -67,7 +67,7 @@ export default function ExportingPage() {
           Custom properties (CSS variables) that work with any framework or vanilla CSS. Scope to
           :root for global access or component-level for encapsulation.
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={(theme) => ({ fontFamily: 'monospace', bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 1, borderRadius: 1 })}>
+        <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace', bgcolor: 'grey.100', p: 1, borderRadius: 1 }}>
           --color-primary: #3361CC;
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
@@ -88,7 +88,7 @@ export default function ExportingPage() {
           Tailwind CSS configuration extending the default theme. Merge with your existing
           tailwind.config.js to add custom colors, spacing, and more.
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={(theme) => ({ fontFamily: 'monospace', bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 1, borderRadius: 1 })}>
+        <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace', bgcolor: 'grey.100', p: 1, borderRadius: 1 }}>
           theme: &#123; extend: &#123; colors: &#123;...&#125; &#125; &#125;
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>
@@ -108,7 +108,7 @@ export default function ExportingPage() {
           Framework-agnostic JSON format following design token standards. Use with build tools,
           design token transformers like Style Dictionary, or import into design tools.
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={(theme) => ({ fontFamily: 'monospace', bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 1, borderRadius: 1 })}>
+        <Typography variant="body2" color="text.secondary" sx={{ fontFamily: 'monospace', bgcolor: 'grey.100', p: 1, borderRadius: 1 }}>
           &#123; "color": &#123; "primary": &#123; "value": "#3361CC" &#125; &#125; &#125;
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 2 }}>

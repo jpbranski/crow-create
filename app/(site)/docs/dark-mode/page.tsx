@@ -176,7 +176,7 @@ export default function DarkModePage() {
         </TableContainer>
       </Paper>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Implementing Elevation with CSS
         </Typography>
@@ -255,7 +255,7 @@ export default function DarkModePage() {
         Colors that work in light mode often need adjustment for dark mode to maintain both aesthetics and WCAG compliance.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Color Adaptation: Light to Dark Mode
         </Typography>
@@ -322,7 +322,7 @@ export default function DarkModePage() {
         Highly saturated colors appear to glow on dark backgrounds. Reduce saturation by 10-20% for dark mode.
       </Typography>
 
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Saturation Adjustment Example
         </Typography>
@@ -409,7 +409,7 @@ export default function DarkModePage() {
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         CSS Custom Properties Approach
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.75rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`:root {
   /* Light mode colors */
@@ -440,7 +440,7 @@ body {
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Detecting System Preference
       </Typography>
-      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
         <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem', whiteSpace: 'pre', overflow: 'auto' }}>
 {`/* Auto dark mode based on system preference */
 @media (prefers-color-scheme: dark) {
