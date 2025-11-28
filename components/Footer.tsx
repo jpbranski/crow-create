@@ -78,7 +78,7 @@ export default function Footer() {
             </MuiLink>
             <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', sm: 'block' } }} />
             <MuiLink
-              href="https://jpbranski.com"
+              href="https://patreon.com/jpbranski"
               target="_blank"
               rel="noopener noreferrer"
               color="primary.main"
@@ -86,7 +86,18 @@ export default function Footer() {
               variant="body2"
               sx={{ fontWeight: 600 }}
             >
-              jpbranski.com
+              Follow on Patreon
+            </MuiLink>
+            <MuiLink
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="primary.main"
+              underline="hover"
+              variant="body2"
+              sx={{ fontWeight: 600 }}
+            >
+              Buy Me a Coffee
             </MuiLink>
           </Box>
         </Box>
@@ -97,9 +108,9 @@ export default function Footer() {
           sx={{
             display: 'block',
             textAlign: 'center',
-            color: 'text.disabled',
-            opacity: 0.7,
-            fontSize: '0.7rem',
+            color: 'text.secondary',
+            fontSize: '0.75rem',
+            mt: 2,
           }}
         >
           As an Amazon Associate I earn from qualifying purchases.

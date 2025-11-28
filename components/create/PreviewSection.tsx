@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import {
   Box,
   Typography,
@@ -15,6 +16,10 @@ import {
   IconButton,
   Checkbox,
   FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
 import {
@@ -26,13 +31,17 @@ import {
   Warning,
   Error as ErrorIcon,
   Compare,
+  Visibility,
 } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import { useRouter } from 'next/navigation'
 
+type ColorBlindMode = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'monochromacy'
+
 export default function PreviewSection() {
   const { config } = useDesignSystem()
   const router = useRouter()
+  const [colorBlindMode, setColorBlindMode] = useState<ColorBlindMode>('none')
 
   const previewStyle = {
     fontFamily: config.typography.bodyFont,
@@ -53,9 +62,52 @@ export default function PreviewSection() {
     router.push(`/compare?themeA=custom&customTheme=${customTheme}&themeB=midnight-purple`)
   }
 
+  const getColorBlindFilter = (): string => {
+    switch (colorBlindMode) {
+      case 'protanopia':
+      case 'deuteranopia':
+        // Red-Green color blindness simulation
+        return 'url(#protanopia-filter)'
+      case 'tritanopia':
+        // Blue-Yellow color blindness simulation
+        return 'url(#tritanopia-filter)'
+      case 'monochromacy':
+        // Complete color blindness
+        return 'grayscale(100%)'
+      default:
+        return 'none'
+    }
+  }
+
   return (
     <Box sx={previewStyle}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+      {/* SVG filters for color blindness simulation */}
+      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+        <defs>
+          {/* Protanopia/Deuteranopia (Red-Green) filter */}
+          <filter id="protanopia-filter">
+            <feColorMatrix
+              type="matrix"
+              values="0.567, 0.433, 0,     0, 0
+                      0.558, 0.442, 0,     0, 0
+                      0,     0.242, 0.758, 0, 0
+                      0,     0,     0,     1, 0"
+            />
+          </filter>
+          {/* Tritanopia (Blue-Yellow) filter */}
+          <filter id="tritanopia-filter">
+            <feColorMatrix
+              type="matrix"
+              values="0.95, 0.05,  0,     0, 0
+                      0,    0.433, 0.567, 0, 0
+                      0,    0.475, 0.525, 0, 0
+                      0,    0,     0,     1, 0"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3, gap: 2, flexWrap: 'wrap' }}>
         <Box>
           <Typography
             variant="h5"
@@ -74,20 +126,39 @@ export default function PreviewSection() {
           </Typography>
         </Box>
 
-        <Button
-          variant="outlined"
-          startIcon={<Compare />}
-          onClick={handleCompareWithMidnightPurple}
-          sx={{ flexShrink: 0, ml: 2 }}
-        >
-          Compare With Midnight Purple
-        </Button>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', flexShrink: 0 }}>
+          <FormControl size="small" sx={{ minWidth: 200 }}>
+            <InputLabel>Color Blindness Simulator</InputLabel>
+            <Select
+              value={colorBlindMode}
+              label="Color Blindness Simulator"
+              onChange={(e) => setColorBlindMode(e.target.value as ColorBlindMode)}
+              startAdornment={<Visibility sx={{ mr: 1, ml: 0.5, color: 'action.active' }} />}
+            >
+              <MenuItem value="none">None</MenuItem>
+              <MenuItem value="protanopia">Protanopia (Red-Green)</MenuItem>
+              <MenuItem value="deuteranopia">Deuteranopia (Red-Green)</MenuItem>
+              <MenuItem value="tritanopia">Tritanopia (Blue-Yellow)</MenuItem>
+              <MenuItem value="monochromacy">Monochromacy (No Color)</MenuItem>
+            </Select>
+          </FormControl>
+
+          <Button
+            variant="outlined"
+            startIcon={<Compare />}
+            onClick={handleCompareWithMidnightPurple}
+            sx={{ flexShrink: 0 }}
+          >
+            Compare With Midnight Purple
+          </Button>
+        </Box>
       </Box>
 
-      <Grid2 container spacing={3}>
-        {/* Hero Section */}
-        <Grid2 size={{ xs: 12 }}>
-          <Paper
+      <Box sx={{ filter: getColorBlindFilter(), transition: 'filter 0.3s ease' }}>
+        <Grid2 container spacing={3}>
+          {/* Hero Section */}
+          <Grid2 size={{ xs: 12 }}>
+            <Paper
             variant="outlined"
             sx={{
               p: 4,
@@ -110,6 +181,7 @@ export default function PreviewSection() {
               variant="h6"
               paragraph
               sx={{
+                fontFamily: config.typography.bodyFont,
                 color: config.palette.textSecondary,
                 mb: 3,
               }}
@@ -173,7 +245,7 @@ export default function PreviewSection() {
               >
                 Accessible
               </Typography>
-              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+              <Typography variant="body2" sx={{ fontFamily: config.typography.bodyFont, color: config.palette.textSecondary }}>
                 Built with WCAG compliance in mind, ensuring your interfaces work for everyone.
               </Typography>
             </CardContent>
@@ -215,7 +287,7 @@ export default function PreviewSection() {
               >
                 Customizable
               </Typography>
-              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+              <Typography variant="body2" sx={{ fontFamily: config.typography.bodyFont, color: config.palette.textSecondary }}>
                 Tailor every aspect of your design system to match your brand perfectly.
               </Typography>
             </CardContent>
@@ -257,7 +329,7 @@ export default function PreviewSection() {
               >
                 Exportable
               </Typography>
-              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+              <Typography variant="body2" sx={{ fontFamily: config.typography.bodyFont, color: config.palette.textSecondary }}>
                 Export your design tokens for MUI, Tailwind, CSS variables, and more.
               </Typography>
             </CardContent>
@@ -394,7 +466,8 @@ export default function PreviewSection() {
             </Box>
           </Paper>
         </Grid2>
-      </Grid2>
+        </Grid2>
+      </Box>
     </Box>
   )
 }

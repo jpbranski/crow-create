@@ -3,6 +3,7 @@
 import { Box, Typography, Paper, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
 import { useDesignSystem } from '@/context/DesignSystemContext'
+import { getContrastRatio, getWCAGLevel } from '@/lib/colorUtils'
 import CodeBlock from '../CodeBlock'
 
 export default function ExportsSection() {
@@ -262,11 +263,249 @@ module.exports = {
     return JSON.stringify(tokens, null, 2)
   }
 
+  // Generate markdown documentation
+  const generateDocumentation = () => {
+    const scale = config.typography.scale
+    const base = config.typography.baseFontSize
+
+    const typographySizes = {
+      h1: (base * Math.pow(scale, 4)).toFixed(1),
+      h2: (base * Math.pow(scale, 3)).toFixed(1),
+      h3: (base * Math.pow(scale, 2)).toFixed(1),
+      h4: (base * Math.pow(scale, 1.5)).toFixed(1),
+      h5: (base * Math.pow(scale, 1)).toFixed(1),
+      h6: (base * Math.pow(scale, 0.5)).toFixed(1),
+      body: base.toFixed(1),
+      caption: (base * 0.875).toFixed(1),
+    }
+
+    // Calculate contrast ratios
+    const textOnBg = getContrastRatio(config.palette.textPrimary, config.palette.background)
+    const textSecondaryOnBg = getContrastRatio(config.palette.textSecondary, config.palette.background)
+    const primaryOnSurface = getContrastRatio(config.palette.primary, config.palette.surface)
+    const secondaryOnSurface = getContrastRatio(config.palette.secondary, config.palette.surface)
+
+    return `# Design System Style Guide
+
+> Generated from Crow Create
+
+## 🎨 Color Palette
+
+### Brand Colors
+
+| Color | Hex Value | Usage |
+|-------|-----------|-------|
+| **Primary** | ${config.palette.primary} | Main brand color, primary actions |
+| **Primary Dark** | ${config.palette.primaryDark} | Hover states, emphasis |
+| **Primary Light** | ${config.palette.primaryLight} | Backgrounds, subtle highlights |
+| **Secondary** | ${config.palette.secondary} | Secondary actions, accents |
+| **Secondary Dark** | ${config.palette.secondaryDark} | Secondary hover states |
+| **Secondary Light** | ${config.palette.secondaryLight} | Secondary backgrounds |
+
+### Semantic Colors
+
+| Color | Hex Value | Usage |
+|-------|-----------|-------|
+| **Success** | ${config.palette.success} | Success states, confirmations |
+| **Warning** | ${config.palette.warning} | Warning states, alerts |
+| **Error** | ${config.palette.error} | Error states, destructive actions |
+| **Info** | ${config.palette.info} | Informational messages |
+
+### Base Colors
+
+| Color | Hex Value | Usage |
+|-------|-----------|-------|
+| **Background** | ${config.palette.background} | Main background |
+| **Surface** | ${config.palette.surface} | Card backgrounds, elevated surfaces |
+| **Text Primary** | ${config.palette.textPrimary} | Primary text content |
+| **Text Secondary** | ${config.palette.textSecondary} | Secondary text, captions |
+
+---
+
+## ✍️ Typography
+
+### Font Families
+
+- **Headings:** ${config.typography.headingFont}
+- **Body:** ${config.typography.bodyFont}
+
+### Type Scale
+
+**Base Font Size:** ${base}px
+**Scale Ratio:** ${scale.toFixed(2)}
+
+| Element | Size | Usage |
+|---------|------|-------|
+| **H1** | ${typographySizes.h1}px | Page titles, hero headings |
+| **H2** | ${typographySizes.h2}px | Section headings |
+| **H3** | ${typographySizes.h3}px | Subsection headings |
+| **H4** | ${typographySizes.h4}px | Card titles |
+| **H5** | ${typographySizes.h5}px | Small headings |
+| **H6** | ${typographySizes.h6}px | Overlines, labels |
+| **Body** | ${typographySizes.body}px | Body copy, paragraphs |
+| **Caption** | ${typographySizes.caption}px | Captions, helper text |
+
+### Typography Examples
+
+\`\`\`
+H1: Build Better Experiences (${typographySizes.h1}px, ${config.typography.headingFont}, 700 weight)
+H2: Create Beautiful Interfaces (${typographySizes.h2}px, ${config.typography.headingFont}, 600 weight)
+H3: Design With Purpose (${typographySizes.h3}px, ${config.typography.headingFont}, 600 weight)
+
+Body: This is body text using ${config.typography.bodyFont} at ${typographySizes.body}px.
+The quick brown fox jumps over the lazy dog.
+
+Caption: Small annotations and labels (${typographySizes.caption}px)
+\`\`\`
+
+---
+
+## ♿ Accessibility
+
+### Contrast Ratios (WCAG 2.1)
+
+| Pairing | Contrast Ratio | Normal Text | Large Text |
+|---------|----------------|-------------|------------|
+| Text Primary on Background | ${textOnBg.toFixed(2)}:1 | ${getWCAGLevel(textOnBg)} | ${getWCAGLevel(textOnBg, true)} |
+| Text Secondary on Background | ${textSecondaryOnBg.toFixed(2)}:1 | ${getWCAGLevel(textSecondaryOnBg)} | ${getWCAGLevel(textSecondaryOnBg, true)} |
+| Primary on Surface | ${primaryOnSurface.toFixed(2)}:1 | ${getWCAGLevel(primaryOnSurface)} | ${getWCAGLevel(primaryOnSurface, true)} |
+| Secondary on Surface | ${secondaryOnSurface.toFixed(2)}:1 | ${getWCAGLevel(secondaryOnSurface)} | ${getWCAGLevel(secondaryOnSurface, true)} |
+
+**WCAG Levels:**
+- **AAA:** Contrast ≥ 7:1 (normal), ≥ 4.5:1 (large)
+- **AA:** Contrast ≥ 4.5:1 (normal), ≥ 3:1 (large)
+- **Fail:** Below AA standards
+
+---
+
+## 📐 Layout & Spacing
+
+### Spacing System
+
+**Base Unit:** ${config.spacing.baseUnit}px
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| **xs** | ${config.spacing.baseUnit * 0.5}px | Tight spacing |
+| **sm** | ${config.spacing.baseUnit}px | Compact spacing |
+| **md** | ${config.spacing.baseUnit * 2}px | Default spacing |
+| **lg** | ${config.spacing.baseUnit * 3}px | Generous spacing |
+| **xl** | ${config.spacing.baseUnit * 4}px | Large spacing |
+
+### Border Radius
+
+**Style:** ${config.radius.style}
+
+| Token | Value |
+|-------|-------|
+| **Small** | ${config.radius.small}px |
+| **Medium** | ${config.radius.medium}px |
+| **Large** | ${config.radius.large}px |
+
+### Shadows
+
+| Token | Value |
+|-------|-------|
+| **sm** | \`${config.shadows.sm}\` |
+| **md** | \`${config.shadows.md}\` |
+| **lg** | \`${config.shadows.lg}\` |
+| **xl** | \`${config.shadows.xl}\` |
+
+---
+
+## 🎬 Motion
+
+### Duration
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| **Fast** | ${config.motion.duration.fast}ms | Micro-interactions |
+| **Normal** | ${config.motion.duration.normal}ms | Standard transitions |
+| **Slow** | ${config.motion.duration.slow}ms | Complex animations |
+
+**Easing:** \`${config.motion.easing}\`
+
+---
+
+## 📦 Sample Components
+
+### Button Example
+
+\`\`\`css
+.button-primary {
+  background-color: ${config.palette.primary};
+  color: ${config.palette.surface};
+  font-family: ${config.typography.bodyFont};
+  font-size: ${typographySizes.body}px;
+  padding: ${config.spacing.baseUnit * 1.5}px ${config.spacing.baseUnit * 3}px;
+  border-radius: ${config.radius.medium}px;
+  transition: all ${config.motion.duration.normal}ms ${config.motion.easing};
+}
+
+.button-primary:hover {
+  background-color: ${config.palette.primaryDark};
+  box-shadow: ${config.shadows.md};
+}
+
+.button-secondary {
+  background-color: transparent;
+  color: ${config.palette.primary};
+  border: 2px solid ${config.palette.primary};
+  font-family: ${config.typography.bodyFont};
+  font-size: ${typographySizes.body}px;
+  padding: ${config.spacing.baseUnit * 1.5}px ${config.spacing.baseUnit * 3}px;
+  border-radius: ${config.radius.medium}px;
+}
+\`\`\`
+
+### Card Example
+
+\`\`\`css
+.card {
+  background-color: ${config.palette.surface};
+  border-radius: ${config.radius.medium}px;
+  box-shadow: ${config.shadows.md};
+  padding: ${config.spacing.baseUnit * 3}px;
+}
+
+.card-title {
+  font-family: ${config.typography.headingFont};
+  font-size: ${typographySizes.h3}px;
+  font-weight: 600;
+  color: ${config.palette.textPrimary};
+  margin-bottom: ${config.spacing.baseUnit * 2}px;
+}
+
+.card-body {
+  font-family: ${config.typography.bodyFont};
+  font-size: ${typographySizes.body}px;
+  color: ${config.palette.textSecondary};
+  line-height: 1.6;
+}
+\`\`\`
+
+---
+
+## 📝 Notes
+
+- All measurements are in pixels unless otherwise specified
+- Color values use hexadecimal format
+- Shadows use CSS box-shadow syntax
+- Typography scale calculated using: base × ratio^exponent
+- Always test color combinations for accessibility compliance
+
+---
+
+*Generated with [Crow Create](https://crowcreate.io) — Design System Helper*
+`
+  }
+
   const exports = [
     { label: 'MUI Theme', code: generateMUITheme(), language: 'typescript' },
     { label: 'CSS Variables', code: generateCSSVariables(), language: 'css' },
     { label: 'Tailwind Config', code: generateTailwindConfig(), language: 'javascript' },
     { label: 'Design Tokens JSON', code: generateDesignTokens(), language: 'json' },
+    { label: 'Documentation (Markdown)', code: generateDocumentation(), language: 'markdown' },
   ]
 
   return (
