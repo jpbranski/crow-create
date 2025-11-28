@@ -88,28 +88,6 @@ export default function Footer() {
             >
               jpbranski.com
             </MuiLink>
-            <MuiLink
-              href="https://patreon.com/jpbranski"
-              target="_blank"
-              rel="noopener noreferrer"
-              color="primary.main"
-              underline="hover"
-              variant="body2"
-              sx={{ fontWeight: 600 }}
-            >
-              Follow on Patreon
-            </MuiLink>
-            <MuiLink
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              color="primary.main"
-              underline="hover"
-              variant="body2"
-              sx={{ fontWeight: 600 }}
-            >
-              Buy Me a Coffee
-            </MuiLink>
           </Box>
         </Box>
 

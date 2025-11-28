@@ -233,34 +233,8 @@ export default function PreviewSection() {
   }
 
   return (
-    <ThemeProvider theme={previewTheme}>
-      <Box sx={previewStyle}>
-        {/* SVG filters for color blindness simulation */}
-        <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-          <defs>
-            {/* Protanopia/Deuteranopia (Red-Green) filter */}
-            <filter id="protanopia-filter">
-              <feColorMatrix
-                type="matrix"
-                values="0.567, 0.433, 0,     0, 0
-                        0.558, 0.442, 0,     0, 0
-                        0,     0.242, 0.758, 0, 0
-                        0,     0,     0,     1, 0"
-              />
-            </filter>
-            {/* Tritanopia (Blue-Yellow) filter */}
-            <filter id="tritanopia-filter">
-              <feColorMatrix
-                type="matrix"
-                values="0.95, 0.05,  0,     0, 0
-                        0,    0.433, 0.567, 0, 0
-                        0,    0.475, 0.525, 0, 0
-                        0,    0,     0,     1, 0"
-              />
-            </filter>
-          </defs>
-        </svg>
-
+    <Box sx={previewStyle}>
+      {/* Section Header and Controls - Use Default Typography */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3, gap: 2, flexWrap: 'wrap' }}>
         <Box>
           <Typography
@@ -308,7 +282,34 @@ export default function PreviewSection() {
         </Box>
       </Box>
 
-      <Box sx={{ filter: getColorBlindFilter(), transition: 'filter 0.3s ease' }}>
+      {/* Preview Content - Apply Custom Typography Theme */}
+      <ThemeProvider theme={previewTheme}>
+        <Box sx={{ filter: getColorBlindFilter(), transition: 'filter 0.3s ease' }}>
+          {/* SVG filters for color blindness simulation */}
+          <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+            <defs>
+              {/* Protanopia/Deuteranopia (Red-Green) filter */}
+              <filter id="protanopia-filter">
+                <feColorMatrix
+                  type="matrix"
+                  values="0.567, 0.433, 0,     0, 0
+                          0.558, 0.442, 0,     0, 0
+                          0,     0.242, 0.758, 0, 0
+                          0,     0,     0,     1, 0"
+                />
+              </filter>
+              {/* Tritanopia (Blue-Yellow) filter */}
+              <filter id="tritanopia-filter">
+                <feColorMatrix
+                  type="matrix"
+                  values="0.95, 0.05,  0,     0, 0
+                          0,    0.433, 0.567, 0, 0
+                          0,    0.475, 0.525, 0, 0
+                          0,    0,     0,     1, 0"
+                />
+              </filter>
+            </defs>
+          </svg>
         <Grid2 container spacing={3}>
           {/* Hero Section */}
           <Grid2 size={{ xs: 12 }}>

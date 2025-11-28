@@ -228,7 +228,7 @@ export default function ContactPage() {
               color="primary"
               size="large"
               startIcon={<Favorite />}
-              href="https://patreon.com/jpbranski"
+              href="https://www.patreon.com/jpthepirate"
               target="_blank"
               rel="noopener noreferrer"
               sx={{
@@ -244,14 +244,14 @@ export default function ContactPage() {
                 transition: 'all 0.3s ease',
               }}
             >
-              Follow on Patreon
+              Follow me on Patreon
             </Button>
             <Button
               variant="outlined"
               color="primary"
               size="large"
               startIcon={<Favorite />}
-              href=""
+              href="https://buymeacoffee.com/jpbranski"
               target="_blank"
               rel="noopener noreferrer"
               sx={{
