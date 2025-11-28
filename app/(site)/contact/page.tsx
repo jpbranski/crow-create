@@ -208,41 +208,68 @@ export default function ContactPage() {
 
         {/* Support the Developer */}
         <Box sx={{ textAlign: 'center', mt: 6 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            startIcon={<Favorite />}
-            href="https://www.patreon.com/jpthepirate"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              px: 4,
-              py: 1.5,
-              fontSize: '1.1rem',
-              fontWeight: 600,
-              boxShadow: 3,
-              '&:hover': {
-                boxShadow: 6,
-                transform: 'translateY(-2px)',
-              },
-              transition: 'all 0.3s ease',
-            }}
-          >
+          <Typography variant="h5" fontWeight={600} gutterBottom>
             Support the Developer
-          </Button>
+          </Typography>
           <Typography
-            variant="body2"
+            variant="body1"
             color="text.secondary"
             sx={{
-              mt: 2,
-              fontStyle: 'italic',
-              maxWidth: '500px',
+              mb: 3,
+              maxWidth: '600px',
               mx: 'auto',
             }}
           >
             Your support helps keep Crow Create free and accessible for everyone.
           </Typography>
+          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              startIcon={<Favorite />}
+              href="https://patreon.com/jpbranski"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                px: 4,
+                py: 1.5,
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                boxShadow: 3,
+                '&:hover': {
+                  boxShadow: 6,
+                  transform: 'translateY(-2px)',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Follow on Patreon
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              startIcon={<Favorite />}
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                px: 4,
+                py: 1.5,
+                fontSize: '1.1rem',
+                fontWeight: 600,
+                borderWidth: 2,
+                '&:hover': {
+                  borderWidth: 2,
+                  transform: 'translateY(-2px)',
+                },
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Buy Me a Coffee
+            </Button>
+          </Box>
         </Box>
       </Container>
     </Box>

@@ -422,7 +422,7 @@ export default function TypographySection() {
                             color: 'text.secondary',
                           }}
                         >
-                          Your {scale.toFixed(2)} scale ratio ensures harmonious sizing relationships across all text elements, creating a professional and polished appearance.
+                          A <strong>{config.typography.scale.toFixed(2)}</strong> scale ratio ensures harmonious sizing relationships across all text elements, creating a professional and polished appearance.
                         </Typography>
                       </CardContent>
                     </Card>

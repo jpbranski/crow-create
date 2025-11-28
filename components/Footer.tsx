@@ -78,6 +78,17 @@ export default function Footer() {
             </MuiLink>
             <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', sm: 'block' } }} />
             <MuiLink
+              href="https://jpbranski.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              color="primary.main"
+              underline="hover"
+              variant="body2"
+              sx={{ fontWeight: 600 }}
+            >
+              jpbranski.com
+            </MuiLink>
+            <MuiLink
               href="https://patreon.com/jpbranski"
               target="_blank"
               rel="noopener noreferrer"
