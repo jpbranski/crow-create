@@ -395,7 +395,7 @@ export default function SemanticTokensPage() {
         When to Use Semantic Tokens
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'success.light', color: 'success.contrastText', borderRadius: 2 }}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'success.light', color: '#000', borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Use Semantic Tokens When:
         </Typography>
@@ -409,7 +409,7 @@ export default function SemanticTokensPage() {
         </Box>
       </Paper>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'warning.light', color: 'warning.contrastText', borderRadius: 2 }}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'warning.light', color: '#000', borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Consider Raw Tokens When:
         </Typography>

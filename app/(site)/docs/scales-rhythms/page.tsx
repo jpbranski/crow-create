@@ -156,7 +156,7 @@ Step 3: 36 × 1.5 = 54px`}
                 <TableCell><strong>Usage</strong></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody sx={{ bgcolor: 'white' }}>
+            <TableBody sx={{ bgcolor: 'grey.100' }}>
               <TableRow>
                 <TableCell>xs</TableCell>
                 <TableCell>16 ÷ 1.333</TableCell>

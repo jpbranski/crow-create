@@ -352,18 +352,18 @@ export default function SerifVsSansPage() {
         </Typography>
 
         <Typography variant="body2" fontWeight={600} sx={{ mt: 2 }}>Sans-Serif System Stack:</Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
 {`font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
              Roboto, "Helvetica Neue", Arial, sans-serif;`}
         </Box>
 
         <Typography variant="body2" fontWeight={600} sx={{ mt: 2 }}>Serif System Stack:</Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
 {`font-family: Georgia, "Times New Roman", Times, serif;`}
         </Box>
 
         <Typography variant="body2" fontWeight={600} sx={{ mt: 2 }}>Monospace System Stack:</Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
 {`font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
              Consolas, "Courier New", monospace;`}
         </Box>

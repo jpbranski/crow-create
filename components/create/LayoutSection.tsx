@@ -291,10 +291,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -316,11 +313,11 @@ export default function LayoutSection() {
                     <Box
                       sx={{
                         p: 1,
-                        bgcolor: '#0D1117',
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: '#F3F4F6',
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
@@ -336,10 +333,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -361,11 +355,11 @@ export default function LayoutSection() {
                     <Box
                       sx={{
                         p: 1,
-                        bgcolor: '#0D1117',
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: '#F3F4F6',
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
@@ -381,10 +375,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -406,11 +397,11 @@ export default function LayoutSection() {
                     <Box
                       sx={{
                         p: 1,
-                        bgcolor: '#0D1117',
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: '#F3F4F6',
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',
@@ -426,10 +417,7 @@ export default function LayoutSection() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: (theme) =>
-                      theme.palette.mode === 'dark'
-                        ? 'rgba(255, 255, 255, 0.04)'
-                        : 'rgba(0, 0, 0, 0.03)',
+                    bgcolor: 'action.hover',
                   }}
                 >
                   <Card
@@ -451,11 +439,11 @@ export default function LayoutSection() {
                     <Box
                       sx={{
                         p: 1,
-                        bgcolor: '#0D1117',
+                        bgcolor: 'grey.900',
                         borderRadius: 1,
                         fontFamily: 'var(--font-jetbrains-mono), monospace',
                         fontSize: '0.7rem',
-                        color: '#F3F4F6',
+                        color: 'grey.100',
                         overflowX: 'auto',
                         whiteSpace: 'pre-wrap',
                         wordBreak: 'break-all',

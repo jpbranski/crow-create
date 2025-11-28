@@ -188,7 +188,7 @@ export default function ChoosingFontsPage() {
         Decorative, script, handwriting, and highly stylized fonts should never be used for body text. They're designed for impact, not sustained reading.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'error.light', color: 'error.contrastText', borderRadius: 2 }}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'error.light', color: '#000', borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Never Use for Body Text:
         </Typography>
@@ -203,7 +203,7 @@ export default function ChoosingFontsPage() {
         </Box>
       </Paper>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'success.light', color: 'success.contrastText', borderRadius: 2 }}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'success.light', color: '#000', borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Appropriate Uses for Decorative Fonts:
         </Typography>

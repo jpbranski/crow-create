@@ -39,10 +39,10 @@ export default function CodeBlock({ code, language = 'typescript' }: CodeBlockPr
             size="small"
             onClick={handleCopy}
             sx={{
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-              color: '#F3F4F6',
+              bgcolor: 'action.hover',
+              color: 'text.primary',
               '&:hover': {
-                bgcolor: 'rgba(255, 255, 255, 0.2)',
+                bgcolor: 'action.selected',
               },
             }}
           >
@@ -57,8 +57,8 @@ export default function CodeBlock({ code, language = 'typescript' }: CodeBlockPr
           p: 2,
           m: 0,
           overflow: 'auto',
-          bgcolor: '#0D1117',
-          color: '#F3F4F6',
+          bgcolor: 'grey.900',
+          color: 'grey.100',
           borderRadius: 1,
           fontFamily: 'var(--font-jetbrains-mono), monospace',
           fontSize: '0.875rem',

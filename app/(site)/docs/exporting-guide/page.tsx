@@ -171,7 +171,7 @@ export default function ExportingGuidePage() {
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           JSON Structure Example
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
 {`{
   "colors": {
     "primary": {
@@ -234,7 +234,7 @@ export default function ExportingGuidePage() {
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Example: Converting to SCSS Variables
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
 {`// Node.js script to convert JSON to SCSS
 const fs = require('fs');
 const tokens = require('./design-tokens.json');
@@ -266,7 +266,7 @@ fs.writeFileSync('_tokens.scss', scss);`}
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Material UI Theme Export
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' }}>
 {`import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -335,7 +335,7 @@ export default theme;`}
         Implementing MUI Theme
       </Typography>
       <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto', whiteSpace: 'pre' }}>
 {`// App.tsx or _app.tsx
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -363,7 +363,7 @@ function App() {
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Tailwind Configuration Export
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' }}>
 {`// tailwind.config.js
 module.exports = {
   theme: {
@@ -427,7 +427,7 @@ module.exports = {
         Using Tailwind Tokens
       </Typography>
       <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto' }}>
 {`<button className="bg-primary text-white px-lg py-md rounded-md shadow-md">
   Primary Button
 </button>
@@ -497,7 +497,7 @@ module.exports = {
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Multi-Theme CSS Variables
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
 {`:root {
   /* Light theme (default) */
   --bg-primary: #ffffff;

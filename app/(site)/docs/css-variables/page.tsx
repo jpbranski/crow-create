@@ -515,7 +515,7 @@ h1 {
         Common Pitfalls and Solutions
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'error.light', color: 'error.contrastText', borderRadius: 2 }}>
+      <Paper sx={{ p: 3, my: 3, bgcolor: 'error.light', color: '#000', borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom fontWeight={600}>
           Mistakes to Avoid
         </Typography>
