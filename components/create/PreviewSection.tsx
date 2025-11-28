@@ -623,7 +623,7 @@ export default function PreviewSection() {
         </Grid2>
         </Grid2>
       </Box>
-      </Box>
     </ThemeProvider>
+    </Box>
   )
 }
