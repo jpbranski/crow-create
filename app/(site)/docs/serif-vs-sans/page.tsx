@@ -346,24 +346,24 @@ export default function SerifVsSansPage() {
         Modern font stacks use system fonts for optimal performance and native appearance across platforms.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           System Font Stacks
         </Typography>
 
         <Typography variant="body2" fontWeight={600} sx={{ mt: 2 }}>Sans-Serif System Stack:</Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' })}>
 {`font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
              Roboto, "Helvetica Neue", Arial, sans-serif;`}
         </Box>
 
         <Typography variant="body2" fontWeight={600} sx={{ mt: 2 }}>Serif System Stack:</Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' })}>
 {`font-family: Georgia, "Times New Roman", Times, serif;`}
         </Box>
 
         <Typography variant="body2" fontWeight={600} sx={{ mt: 2 }}>Monospace System Stack:</Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', my: 1, overflow: 'auto' })}>
 {`font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
              Consolas, "Courier New", monospace;`}
         </Box>

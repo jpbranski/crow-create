@@ -42,7 +42,7 @@ export default function ScalesRhythmsPage() {
         <Typography variant="body1" paragraph>
           Start with a base size (usually your body text size, like 16px). Multiply by your chosen ratio repeatedly to generate larger sizes. Divide by the ratio to generate smaller sizes.
         </Typography>
-        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' })}>
 {`Base size: 16px
 Ratio: 1.5 (Perfect Fifth)
 
@@ -141,7 +141,7 @@ Step 3: 36 × 1.5 = 54px`}
         Let's walk through creating a practical type scale for a web application using the Perfect Fourth ratio (1.333).
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Example: Perfect Fourth Scale (16px base, 1.333 ratio)
         </Typography>
@@ -156,7 +156,7 @@ Step 3: 36 × 1.5 = 54px`}
                 <TableCell><strong>Usage</strong></TableCell>
               </TableRow>
             </TableHead>
-            <TableBody sx={{ bgcolor: 'white' }}>
+            <TableBody sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100] })}>
               <TableRow>
                 <TableCell>xs</TableCell>
                 <TableCell>16 ÷ 1.333</TableCell>
@@ -258,7 +258,7 @@ Step 3: 36 × 1.5 = 54px`}
         <Typography variant="body1" paragraph>
           Line height should be a multiple of your baseline unit. For 16px text with an 8px baseline:
         </Typography>
-        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', mb: 2 }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem', mb: 2 })}>
 {`font-size: 16px
 line-height: 24px (3 × 8px baseline)
 ratio: 1.5 (24 ÷ 16)`}
@@ -270,7 +270,7 @@ ratio: 1.5 (24 ÷ 16)`}
         <Typography variant="body1" paragraph>
           Margins between elements should also follow the baseline grid:
         </Typography>
-        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.85rem' })}>
 {`margin-bottom: 16px (2 × 8px baseline)
 margin-bottom: 24px (3 × 8px baseline)
 margin-bottom: 32px (4 × 8px baseline)`}
@@ -281,7 +281,7 @@ margin-bottom: 32px (4 × 8px baseline)`}
         Practical Vertical Rhythm Example
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           8px Baseline Grid System
         </Typography>
@@ -383,7 +383,7 @@ p {
         Many design systems use semantic names (xs, sm, md, lg, xl) for spacing, making it easier to communicate and remember.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           T-Shirt Size Spacing Scale (8px base)
         </Typography>
@@ -416,7 +416,7 @@ p {
         Your scale can (and often should) change at different screen sizes. Mobile devices benefit from tighter scales, while desktop displays can accommodate larger type.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Responsive Type Scale Example
         </Typography>

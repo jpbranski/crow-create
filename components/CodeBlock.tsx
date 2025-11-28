@@ -38,13 +38,19 @@ export default function CodeBlock({ code, language = 'typescript' }: CodeBlockPr
           <IconButton
             size="small"
             onClick={handleCopy}
-            sx={{
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-              color: '#F3F4F6',
+            sx={(theme) => ({
+              bgcolor: theme.palette.mode === 'dark'
+                ? 'rgba(255, 255, 255, 0.1)'
+                : 'rgba(0, 0, 0, 0.04)',
+              color: theme.palette.mode === 'dark'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
               '&:hover': {
-                bgcolor: 'rgba(255, 255, 255, 0.2)',
+                bgcolor: theme.palette.mode === 'dark'
+                  ? 'rgba(255, 255, 255, 0.2)'
+                  : 'rgba(0, 0, 0, 0.08)',
               },
-            }}
+            })}
           >
             {copied ? <Check fontSize="small" /> : <ContentCopy fontSize="small" />}
           </IconButton>
@@ -53,12 +59,16 @@ export default function CodeBlock({ code, language = 'typescript' }: CodeBlockPr
 
       <Box
         component="pre"
-        sx={{
+        sx={(theme) => ({
           p: 2,
           m: 0,
           overflow: 'auto',
-          bgcolor: '#0D1117',
-          color: '#F3F4F6',
+          bgcolor: theme.palette.mode === 'dark'
+            ? theme.palette.grey[900]
+            : theme.palette.grey[100],
+          color: theme.palette.mode === 'dark'
+            ? theme.palette.grey[100]
+            : theme.palette.grey[900],
           borderRadius: 1,
           fontFamily: 'var(--font-jetbrains-mono), monospace',
           fontSize: '0.875rem',
@@ -67,7 +77,7 @@ export default function CodeBlock({ code, language = 'typescript' }: CodeBlockPr
           '& code': {
             fontFamily: 'inherit',
           },
-        }}
+        })}
       >
         <code>{code}</code>
       </Box>

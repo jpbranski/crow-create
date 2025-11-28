@@ -90,7 +90,7 @@ export default function ExportingGuidePage() {
         <Typography variant="body1" paragraph>
           Exported CSS variables are organized by category and use semantic naming conventions.
         </Typography>
-        <Box sx={{ bgcolor: 'grey.100', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`:root {
   /* Color Palette */
   --color-primary: #3b82f6;
@@ -167,11 +167,11 @@ export default function ExportingGuidePage() {
         JSON provides maximum flexibility. Use it to build custom integrations, generate multiple formats, or process tokens with build tools.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           JSON Structure Example
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`{
   "colors": {
     "primary": {
@@ -230,11 +230,11 @@ export default function ExportingGuidePage() {
         JSON tokens can be transformed into any format using build tools like Style Dictionary, Theo, or custom scripts.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Example: Converting to SCSS Variables
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`// Node.js script to convert JSON to SCSS
 const fs = require('fs');
 const tokens = require('./design-tokens.json');
@@ -262,11 +262,11 @@ fs.writeFileSync('_tokens.scss', scss);`}
         For React applications using Material UI, Crow Create generates a complete, ready-to-use theme object with createTheme() configuration.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Material UI Theme Export
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -334,8 +334,8 @@ export default theme;`}
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Implementing MUI Theme
       </Typography>
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto', whiteSpace: 'pre' }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`// App.tsx or _app.tsx
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -359,11 +359,11 @@ function App() {
         Tailwind users get a complete tailwind.config.js file with custom colors, spacing, typography, and more, ready to extend your Tailwind configuration.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Tailwind Configuration Export
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.7rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`// tailwind.config.js
 module.exports = {
   theme: {
@@ -426,8 +426,8 @@ module.exports = {
       <Typography variant="h5" gutterBottom fontWeight={600} sx={{ mt: 3 }}>
         Using Tailwind Tokens
       </Typography>
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto' }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.8rem', overflow: 'auto' })}>
 {`<button className="bg-primary text-white px-lg py-md rounded-md shadow-md">
   Primary Button
 </button>
@@ -493,11 +493,11 @@ module.exports = {
         For applications supporting multiple themes (light/dark, brand variations), export separate token sets and switch between them.
       </Typography>
 
-      <Paper sx={{ p: 3, my: 3, bgcolor: 'grey.100', borderRadius: 2 }}>
+      <Paper sx={(theme) => ({ p: 3, my: 3, bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], borderRadius: 2 })}>
         <Typography variant="subtitle1" fontWeight={600} gutterBottom>
           Multi-Theme CSS Variables
         </Typography>
-        <Box sx={{ bgcolor: 'white', p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' }}>
+        <Box sx={(theme) => ({ bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[100], p: 2, borderRadius: 1, fontFamily: 'monospace', fontSize: '0.75rem', overflow: 'auto', whiteSpace: 'pre' })}>
 {`:root {
   /* Light theme (default) */
   --bg-primary: #ffffff;
