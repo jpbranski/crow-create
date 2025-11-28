@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useMemo } from 'react'
 import {
   Box,
   Typography,
@@ -15,6 +16,12 @@ import {
   IconButton,
   Checkbox,
   FormControlLabel,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  ThemeProvider,
+  createTheme,
 } from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
 import {
@@ -26,13 +33,168 @@ import {
   Warning,
   Error as ErrorIcon,
   Compare,
+  Visibility,
 } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import { useRouter } from 'next/navigation'
 
+type ColorBlindMode = 'none' | 'protanopia' | 'deuteranopia' | 'tritanopia' | 'monochromacy'
+
 export default function PreviewSection() {
   const { config } = useDesignSystem()
   const router = useRouter()
+  const [colorBlindMode, setColorBlindMode] = useState<ColorBlindMode>('none')
+
+  // Create a custom MUI theme based on the user's design system configuration
+  const previewTheme = useMemo(() => {
+    return createTheme({
+      palette: {
+        primary: {
+          main: config.palette.primary,
+          dark: config.palette.primaryDark,
+          light: config.palette.primaryLight,
+        },
+        secondary: {
+          main: config.palette.secondary,
+          dark: config.palette.secondaryDark,
+          light: config.palette.secondaryLight,
+        },
+        success: {
+          main: config.palette.success,
+        },
+        warning: {
+          main: config.palette.warning,
+        },
+        error: {
+          main: config.palette.error,
+        },
+        info: {
+          main: config.palette.info,
+        },
+        background: {
+          default: config.palette.background,
+          paper: config.palette.surface,
+        },
+        text: {
+          primary: config.palette.textPrimary,
+          secondary: config.palette.textSecondary,
+        },
+      },
+      typography: {
+        fontFamily: config.typography.bodyFont,
+        fontSize: config.typography.baseFontSize,
+        h1: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 4)).toFixed(1)}px`,
+          fontWeight: 700,
+        },
+        h2: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 3)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h3: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 2)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h4: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 1.5)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h5: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 1)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h6: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 0.5)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        body1: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${config.typography.baseFontSize}px`,
+        },
+        body2: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${config.typography.baseFontSize}px`,
+        },
+        button: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${config.typography.baseFontSize}px`,
+        },
+        caption: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${(config.typography.baseFontSize * 0.875).toFixed(1)}px`,
+        },
+      },
+      spacing: config.spacing.baseUnit,
+      shape: {
+        borderRadius: config.radius.medium,
+      },
+      components: {
+        MuiTextField: {
+          styleOverrides: {
+            root: {
+              '& input': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& textarea': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& label': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& input::placeholder': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& textarea::placeholder': {
+                fontFamily: config.typography.bodyFont,
+              },
+            },
+          },
+        },
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+              textTransform: 'none',
+            },
+          },
+        },
+        MuiChip: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+        MuiAlert: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+        MuiFormControlLabel: {
+          styleOverrides: {
+            label: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+        MuiInputLabel: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+      },
+    })
+  }, [config])
 
   const previewStyle = {
     fontFamily: config.typography.bodyFont,
@@ -53,9 +215,27 @@ export default function PreviewSection() {
     router.push(`/compare?themeA=custom&customTheme=${customTheme}&themeB=midnight-purple`)
   }
 
+  const getColorBlindFilter = (): string => {
+    switch (colorBlindMode) {
+      case 'protanopia':
+      case 'deuteranopia':
+        // Red-Green color blindness simulation
+        return 'url(#protanopia-filter)'
+      case 'tritanopia':
+        // Blue-Yellow color blindness simulation
+        return 'url(#tritanopia-filter)'
+      case 'monochromacy':
+        // Complete color blindness
+        return 'grayscale(100%)'
+      default:
+        return 'none'
+    }
+  }
+
   return (
     <Box sx={previewStyle}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3 }}>
+      {/* Section Header and Controls - Use Default Typography */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3, gap: 2, flexWrap: 'wrap' }}>
         <Box>
           <Typography
             variant="h5"
@@ -74,20 +254,66 @@ export default function PreviewSection() {
           </Typography>
         </Box>
 
-        <Button
-          variant="outlined"
-          startIcon={<Compare />}
-          onClick={handleCompareWithMidnightPurple}
-          sx={{ flexShrink: 0, ml: 2 }}
-        >
-          Compare With Midnight Purple
-        </Button>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', flexShrink: 0 }}>
+          <FormControl size="small" sx={{ minWidth: 200 }}>
+            <InputLabel>Color Blindness Simulator</InputLabel>
+            <Select
+              value={colorBlindMode}
+              label="Color Blindness Simulator"
+              onChange={(e) => setColorBlindMode(e.target.value as ColorBlindMode)}
+              startAdornment={<Visibility sx={{ mr: 1, ml: 0.5, color: 'action.active' }} />}
+            >
+              <MenuItem value="none">None</MenuItem>
+              <MenuItem value="protanopia">Protanopia (Red-Green)</MenuItem>
+              <MenuItem value="deuteranopia">Deuteranopia (Red-Green)</MenuItem>
+              <MenuItem value="tritanopia">Tritanopia (Blue-Yellow)</MenuItem>
+              <MenuItem value="monochromacy">Monochromacy (No Color)</MenuItem>
+            </Select>
+          </FormControl>
+
+          <Button
+            variant="outlined"
+            startIcon={<Compare />}
+            onClick={handleCompareWithMidnightPurple}
+            sx={{ flexShrink: 0 }}
+          >
+            Compare With Midnight Purple
+          </Button>
+        </Box>
       </Box>
 
-      <Grid2 container spacing={3}>
-        {/* Hero Section */}
-        <Grid2 size={{ xs: 12 }}>
-          <Paper
+      {/* Preview Content - Apply Custom Typography Theme */}
+      <ThemeProvider theme={previewTheme}>
+        <Box sx={{ filter: getColorBlindFilter(), transition: 'filter 0.3s ease' }}>
+          {/* SVG filters for color blindness simulation */}
+          <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+            <defs>
+              {/* Protanopia/Deuteranopia (Red-Green) filter */}
+              <filter id="protanopia-filter">
+                <feColorMatrix
+                  type="matrix"
+                  values="0.567, 0.433, 0,     0, 0
+                          0.558, 0.442, 0,     0, 0
+                          0,     0.242, 0.758, 0, 0
+                          0,     0,     0,     1, 0"
+                />
+              </filter>
+              {/* Tritanopia (Blue-Yellow) filter */}
+              <filter id="tritanopia-filter">
+                <feColorMatrix
+                  type="matrix"
+                  values="0.95, 0.05,  0,     0, 0
+                          0,    0.433, 0.567, 0, 0
+                          0,    0.475, 0.525, 0, 0
+                          0,    0,     0,     1, 0"
+                />
+              </filter>
+            </defs>
+          </svg>
+        <Grid2 container spacing={3}>
+          {/* Hero Section */}
+          <Grid2 size={{ xs: 12 }}>
+            <Paper
             variant="outlined"
             sx={{
               p: 4,
@@ -110,6 +336,7 @@ export default function PreviewSection() {
               variant="h6"
               paragraph
               sx={{
+                fontFamily: config.typography.bodyFont,
                 color: config.palette.textSecondary,
                 mb: 3,
               }}
@@ -173,7 +400,7 @@ export default function PreviewSection() {
               >
                 Accessible
               </Typography>
-              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+              <Typography variant="body2" sx={{ fontFamily: config.typography.bodyFont, color: config.palette.textSecondary }}>
                 Built with WCAG compliance in mind, ensuring your interfaces work for everyone.
               </Typography>
             </CardContent>
@@ -215,7 +442,7 @@ export default function PreviewSection() {
               >
                 Customizable
               </Typography>
-              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+              <Typography variant="body2" sx={{ fontFamily: config.typography.bodyFont, color: config.palette.textSecondary }}>
                 Tailor every aspect of your design system to match your brand perfectly.
               </Typography>
             </CardContent>
@@ -257,7 +484,7 @@ export default function PreviewSection() {
               >
                 Exportable
               </Typography>
-              <Typography variant="body2" sx={{ color: config.palette.textSecondary }}>
+              <Typography variant="body2" sx={{ fontFamily: config.typography.bodyFont, color: config.palette.textSecondary }}>
                 Export your design tokens for MUI, Tailwind, CSS variables, and more.
               </Typography>
             </CardContent>
@@ -394,7 +621,9 @@ export default function PreviewSection() {
             </Box>
           </Paper>
         </Grid2>
-      </Grid2>
+        </Grid2>
+      </Box>
+    </ThemeProvider>
     </Box>
   )
 }

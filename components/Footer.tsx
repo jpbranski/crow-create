@@ -97,9 +97,9 @@ export default function Footer() {
           sx={{
             display: 'block',
             textAlign: 'center',
-            color: 'text.disabled',
-            opacity: 0.7,
-            fontSize: '0.7rem',
+            color: 'text.secondary',
+            fontSize: '0.75rem',
+            mt: 2,
           }}
         >
           As an Amazon Associate I earn from qualifying purchases.

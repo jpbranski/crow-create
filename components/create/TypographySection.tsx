@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import {
   Box,
   Grid,
@@ -11,8 +12,13 @@ import {
   MenuItem,
   Slider,
   Chip,
+  ToggleButton,
+  ToggleButtonGroup,
+  Button,
+  Card,
+  CardContent,
 } from '@mui/material'
-import { AutoAwesome } from '@mui/icons-material'
+import { AutoAwesome, ViewCompact, ViewAgenda } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 
 const AVAILABLE_FONTS = [
@@ -61,6 +67,7 @@ const FONT_PAIRINGS: Record<string, string[]> = {
 
 export default function TypographySection() {
   const { config, updateTypography } = useDesignSystem()
+  const [previewMode, setPreviewMode] = useState<'plain' | 'full'>('plain')
 
   const suggestedHeadingFonts = FONT_PAIRINGS[config.typography.bodyFont] || []
 
@@ -212,66 +219,217 @@ export default function TypographySection() {
         {/* Typography Preview */}
         <Grid item xs={12}>
           <Paper variant="outlined" sx={{ p: 3 }}>
-            <Typography variant="h6" gutterBottom>
-              Scale Preview
-            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+              <Typography variant="h6">
+                Typography Preview
+              </Typography>
 
-            <Box sx={{ '& > *': { mb: 2 } }}>
-              <Box>
-                <Typography
-                  sx={{ fontFamily: config.typography.headingFont, fontSize: `${scale.h1}px`, fontWeight: 700 }}
-                >
-                  H1 Heading
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {scale.h1}px / {config.typography.headingFont}
-                </Typography>
-              </Box>
-
-              <Box>
-                <Typography
-                  sx={{ fontFamily: config.typography.headingFont, fontSize: `${scale.h2}px`, fontWeight: 600 }}
-                >
-                  H2 Heading
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {scale.h2}px / {config.typography.headingFont}
-                </Typography>
-              </Box>
-
-              <Box>
-                <Typography
-                  sx={{ fontFamily: config.typography.headingFont, fontSize: `${scale.h3}px`, fontWeight: 600 }}
-                >
-                  H3 Heading
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {scale.h3}px / {config.typography.headingFont}
-                </Typography>
-              </Box>
-
-              <Box>
-                <Typography
-                  sx={{ fontFamily: config.typography.bodyFont, fontSize: `${scale.body}px` }}
-                >
-                  This is body text. The quick brown fox jumps over the lazy dog.
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {scale.body}px / {config.typography.bodyFont}
-                </Typography>
-              </Box>
-
-              <Box>
-                <Typography
-                  sx={{ fontFamily: config.typography.bodyFont, fontSize: `${scale.caption}px` }}
-                >
-                  This is caption text for small annotations and labels.
-                </Typography>
-                <Typography variant="caption" color="text.secondary">
-                  {scale.caption}px / {config.typography.bodyFont}
-                </Typography>
-              </Box>
+              <ToggleButtonGroup
+                value={previewMode}
+                exclusive
+                onChange={(_e, value) => value && setPreviewMode(value)}
+                size="small"
+              >
+                <ToggleButton value="plain">
+                  <ViewCompact sx={{ mr: 1 }} fontSize="small" />
+                  Plain
+                </ToggleButton>
+                <ToggleButton value="full">
+                  <ViewAgenda sx={{ mr: 1 }} fontSize="small" />
+                  Full UI
+                </ToggleButton>
+              </ToggleButtonGroup>
             </Box>
+
+            {previewMode === 'plain' ? (
+              <Box sx={{ '& > *': { mb: 2 } }}>
+                <Box>
+                  <Typography
+                    sx={{ fontFamily: config.typography.headingFont, fontSize: `${scale.h1}px`, fontWeight: 700 }}
+                  >
+                    H1 Heading
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {scale.h1}px / {config.typography.headingFont}
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Typography
+                    sx={{ fontFamily: config.typography.headingFont, fontSize: `${scale.h2}px`, fontWeight: 600 }}
+                  >
+                    H2 Heading
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {scale.h2}px / {config.typography.headingFont}
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Typography
+                    sx={{ fontFamily: config.typography.headingFont, fontSize: `${scale.h3}px`, fontWeight: 600 }}
+                  >
+                    H3 Heading
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {scale.h3}px / {config.typography.headingFont}
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Typography
+                    sx={{ fontFamily: config.typography.bodyFont, fontSize: `${scale.body}px` }}
+                  >
+                    This is body text. The quick brown fox jumps over the lazy dog.
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {scale.body}px / {config.typography.bodyFont}
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Typography
+                    sx={{ fontFamily: config.typography.bodyFont, fontSize: `${scale.caption}px` }}
+                  >
+                    This is caption text for small annotations and labels.
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {scale.caption}px / {config.typography.bodyFont}
+                  </Typography>
+                </Box>
+              </Box>
+            ) : (
+              <Box sx={{ fontFamily: config.typography.bodyFont }}>
+                {/* Hero Section */}
+                <Box sx={{ mb: 4 }}>
+                  <Typography
+                    sx={{
+                      fontFamily: config.typography.headingFont,
+                      fontSize: `${scale.h1}px`,
+                      fontWeight: 700,
+                      mb: 2,
+                    }}
+                  >
+                    Build Better Experiences
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: config.typography.bodyFont,
+                      fontSize: `${scale.body}px`,
+                      lineHeight: 1.6,
+                      color: 'text.secondary',
+                      mb: 3,
+                    }}
+                  >
+                    Create beautiful, accessible interfaces with thoughtful typography. This preview demonstrates how your chosen fonts and type scale work together in a real-world application.
+                  </Typography>
+
+                  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        fontFamily: config.typography.bodyFont,
+                        fontSize: `${scale.body}px`,
+                        textTransform: 'none',
+                      }}
+                    >
+                      Primary Button
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        fontFamily: config.typography.bodyFont,
+                        fontSize: `${scale.body}px`,
+                        textTransform: 'none',
+                      }}
+                    >
+                      Secondary Button
+                    </Button>
+                  </Box>
+                </Box>
+
+                {/* Section with H2 */}
+                <Box sx={{ mb: 4 }}>
+                  <Typography
+                    sx={{
+                      fontFamily: config.typography.headingFont,
+                      fontSize: `${scale.h2}px`,
+                      fontWeight: 600,
+                      mb: 2,
+                    }}
+                  >
+                    Typography in Practice
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: config.typography.bodyFont,
+                      fontSize: `${scale.body}px`,
+                      lineHeight: 1.6,
+                      mb: 2,
+                    }}
+                  >
+                    The selected type scale creates a clear visual hierarchy. Heading fonts draw attention to important content, while body fonts ensure comfortable reading for longer text passages.
+                  </Typography>
+                </Box>
+
+                {/* Card Example */}
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <Card variant="outlined">
+                      <CardContent>
+                        <Typography
+                          sx={{
+                            fontFamily: config.typography.headingFont,
+                            fontSize: `${scale.h3}px`,
+                            fontWeight: 600,
+                            mb: 1,
+                          }}
+                        >
+                          Card Title Example
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: config.typography.bodyFont,
+                            fontSize: `${scale.body}px`,
+                            lineHeight: 1.6,
+                            color: 'text.secondary',
+                          }}
+                        >
+                          This card demonstrates how your typography system works with common UI components. The heading uses {config.typography.headingFont}, while body text uses {config.typography.bodyFont}.
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <Card variant="outlined">
+                      <CardContent>
+                        <Typography
+                          sx={{
+                            fontFamily: config.typography.headingFont,
+                            fontSize: `${scale.h3}px`,
+                            fontWeight: 600,
+                            mb: 1,
+                          }}
+                        >
+                          Consistent Rhythm
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontFamily: config.typography.bodyFont,
+                            fontSize: `${scale.body}px`,
+                            lineHeight: 1.6,
+                            color: 'text.secondary',
+                          }}
+                        >
+                          A <strong>{config.typography.scale.toFixed(2)}</strong> scale ratio ensures harmonious sizing relationships across all text elements, creating a professional and polished appearance.
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                </Grid>
+              </Box>
+            )}
           </Paper>
         </Grid>
       </Grid>
