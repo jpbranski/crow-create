@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import {
   Box,
   Typography,
@@ -20,6 +20,8 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  ThemeProvider,
+  createTheme,
 } from '@mui/material'
 import Grid2 from '@mui/material/Grid2'
 import {
@@ -42,6 +44,157 @@ export default function PreviewSection() {
   const { config } = useDesignSystem()
   const router = useRouter()
   const [colorBlindMode, setColorBlindMode] = useState<ColorBlindMode>('none')
+
+  // Create a custom MUI theme based on the user's design system configuration
+  const previewTheme = useMemo(() => {
+    return createTheme({
+      palette: {
+        primary: {
+          main: config.palette.primary,
+          dark: config.palette.primaryDark,
+          light: config.palette.primaryLight,
+        },
+        secondary: {
+          main: config.palette.secondary,
+          dark: config.palette.secondaryDark,
+          light: config.palette.secondaryLight,
+        },
+        success: {
+          main: config.palette.success,
+        },
+        warning: {
+          main: config.palette.warning,
+        },
+        error: {
+          main: config.palette.error,
+        },
+        info: {
+          main: config.palette.info,
+        },
+        background: {
+          default: config.palette.background,
+          paper: config.palette.surface,
+        },
+        text: {
+          primary: config.palette.textPrimary,
+          secondary: config.palette.textSecondary,
+        },
+      },
+      typography: {
+        fontFamily: config.typography.bodyFont,
+        fontSize: config.typography.baseFontSize,
+        h1: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 4)).toFixed(1)}px`,
+          fontWeight: 700,
+        },
+        h2: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 3)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h3: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 2)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h4: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 1.5)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h5: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 1)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        h6: {
+          fontFamily: config.typography.headingFont,
+          fontSize: `${(config.typography.baseFontSize * Math.pow(config.typography.scale, 0.5)).toFixed(1)}px`,
+          fontWeight: 600,
+        },
+        body1: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${config.typography.baseFontSize}px`,
+        },
+        body2: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${config.typography.baseFontSize}px`,
+        },
+        button: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${config.typography.baseFontSize}px`,
+        },
+        caption: {
+          fontFamily: config.typography.bodyFont,
+          fontSize: `${(config.typography.baseFontSize * 0.875).toFixed(1)}px`,
+        },
+      },
+      spacing: config.spacing.baseUnit,
+      shape: {
+        borderRadius: config.radius.medium,
+      },
+      components: {
+        MuiTextField: {
+          styleOverrides: {
+            root: {
+              '& input': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& textarea': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& label': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& input::placeholder': {
+                fontFamily: config.typography.bodyFont,
+              },
+              '& textarea::placeholder': {
+                fontFamily: config.typography.bodyFont,
+              },
+            },
+          },
+        },
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+              textTransform: 'none',
+            },
+          },
+        },
+        MuiChip: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+        MuiAlert: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+        MuiFormControlLabel: {
+          styleOverrides: {
+            label: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+        MuiInputLabel: {
+          styleOverrides: {
+            root: {
+              fontFamily: config.typography.bodyFont,
+            },
+          },
+        },
+      },
+    })
+  }, [config])
 
   const previewStyle = {
     fontFamily: config.typography.bodyFont,
@@ -80,32 +233,33 @@ export default function PreviewSection() {
   }
 
   return (
-    <Box sx={previewStyle}>
-      {/* SVG filters for color blindness simulation */}
-      <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-        <defs>
-          {/* Protanopia/Deuteranopia (Red-Green) filter */}
-          <filter id="protanopia-filter">
-            <feColorMatrix
-              type="matrix"
-              values="0.567, 0.433, 0,     0, 0
-                      0.558, 0.442, 0,     0, 0
-                      0,     0.242, 0.758, 0, 0
-                      0,     0,     0,     1, 0"
-            />
-          </filter>
-          {/* Tritanopia (Blue-Yellow) filter */}
-          <filter id="tritanopia-filter">
-            <feColorMatrix
-              type="matrix"
-              values="0.95, 0.05,  0,     0, 0
-                      0,    0.433, 0.567, 0, 0
-                      0,    0.475, 0.525, 0, 0
-                      0,    0,     0,     1, 0"
-            />
-          </filter>
-        </defs>
-      </svg>
+    <ThemeProvider theme={previewTheme}>
+      <Box sx={previewStyle}>
+        {/* SVG filters for color blindness simulation */}
+        <svg style={{ position: 'absolute', width: 0, height: 0 }}>
+          <defs>
+            {/* Protanopia/Deuteranopia (Red-Green) filter */}
+            <filter id="protanopia-filter">
+              <feColorMatrix
+                type="matrix"
+                values="0.567, 0.433, 0,     0, 0
+                        0.558, 0.442, 0,     0, 0
+                        0,     0.242, 0.758, 0, 0
+                        0,     0,     0,     1, 0"
+              />
+            </filter>
+            {/* Tritanopia (Blue-Yellow) filter */}
+            <filter id="tritanopia-filter">
+              <feColorMatrix
+                type="matrix"
+                values="0.95, 0.05,  0,     0, 0
+                        0,    0.433, 0.567, 0, 0
+                        0,    0.475, 0.525, 0, 0
+                        0,    0,     0,     1, 0"
+              />
+            </filter>
+          </defs>
+        </svg>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 3, gap: 2, flexWrap: 'wrap' }}>
         <Box>
@@ -468,6 +622,7 @@ export default function PreviewSection() {
         </Grid2>
         </Grid2>
       </Box>
-    </Box>
+      </Box>
+    </ThemeProvider>
   )
 }
