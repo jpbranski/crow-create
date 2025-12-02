@@ -1,10 +1,10 @@
 'use client'
 
-import { Box, Container, Drawer, List, ListItem, ListItemButton, ListItemText, Typography, useMediaQuery, useTheme, IconButton } from '@mui/material'
-import { Menu as MenuIcon } from '@mui/icons-material'
+import { Box, Container, Drawer, List, ListItem, ListItemButton, ListItemText, Typography, useMediaQuery, useTheme, IconButton, TextField, InputAdornment } from '@mui/material'
+import { Menu as MenuIcon, Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 const drawerWidth = 240
 
@@ -36,40 +36,100 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
   }
+
+  const handleClearSearch = () => {
+    setSearchQuery('')
+  }
+
+  // Filter doc links based on search query
+  const filteredLinks = useMemo(() => {
+    if (!searchQuery.trim()) return docLinks
+
+    const query = searchQuery.toLowerCase()
+    return docLinks.filter((link) =>
+      link.title.toLowerCase().includes(query)
+    )
+  }, [searchQuery])
 
   const drawer = (
     <Box sx={{ p: 2 }}>
       <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
         Documentation
       </Typography>
+
+      {/* Search Field */}
+      <TextField
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            handleClearSearch()
+          }
+        }}
+        placeholder="Search docs..."
+        size="small"
+        fullWidth
+        aria-label="Search documentation"
+        sx={{ mb: 2 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon fontSize="small" />
+            </InputAdornment>
+          ),
+          endAdornment: searchQuery && (
+            <InputAdornment position="end">
+              <IconButton
+                size="small"
+                onClick={handleClearSearch}
+                aria-label="Clear search"
+                edge="end"
+              >
+                <ClearIcon fontSize="small" />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      {/* Doc Links List */}
       <List>
-        {docLinks.map((link) => (
-          <ListItem key={link.href} disablePadding>
-            <ListItemButton
-              component={Link}
-              href={link.href}
-              selected={pathname === link.href}
-              onClick={() => isMobile && setMobileOpen(false)}
-              sx={{
-                borderRadius: 1,
-                mb: 0.5,
-                '&.Mui-selected': {
-                  bgcolor: 'primary.main',
-                  color: 'primary.contrastText',
-                  '&:hover': {
-                    bgcolor: 'primary.dark',
+        {filteredLinks.length > 0 ? (
+          filteredLinks.map((link) => (
+            <ListItem key={link.href} disablePadding>
+              <ListItemButton
+                component={Link}
+                href={link.href}
+                selected={pathname === link.href}
+                onClick={() => isMobile && setMobileOpen(false)}
+                sx={{
+                  borderRadius: 1,
+                  mb: 0.5,
+                  '&.Mui-selected': {
+                    bgcolor: 'primary.main',
+                    color: 'primary.contrastText',
+                    '&:hover': {
+                      bgcolor: 'primary.dark',
+                    },
                   },
-                },
-              }}
-            >
-              <ListItemText primary={link.title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+                }}
+              >
+                <ListItemText primary={link.title} />
+              </ListItemButton>
+            </ListItem>
+          ))
+        ) : (
+          <Box sx={{ p: 2, textAlign: 'center' }}>
+            <Typography variant="body2" color="text.secondary">
+              No results found
+            </Typography>
+          </Box>
+        )}
       </List>
     </Box>
   )

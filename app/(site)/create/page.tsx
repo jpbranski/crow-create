@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Container,
   Box,
@@ -16,6 +16,7 @@ import {
 } from '@mui/material'
 import {
   Palette as PaletteIcon,
+  Accessibility as AccessibilityIcon,
   TextFields,
   ViewInAr,
   Visibility,
@@ -23,6 +24,7 @@ import {
   ExpandMore,
 } from '@mui/icons-material'
 import PaletteSection from '@/components/create/PaletteSection'
+import AccessibilitySection from '@/components/create/AccessibilitySection'
 import TypographySection from '@/components/create/TypographySection'
 import LayoutSection from '@/components/create/LayoutSection'
 import PreviewSection from '@/components/create/PreviewSection'
@@ -48,14 +50,51 @@ function TabPanel({ children, value, index }: TabPanelProps) {
   )
 }
 
+// Tab hash mapping
+const TAB_HASHES = ['palette', 'accessibility', 'typography', 'layout', 'preview', 'exports'] as const
+type TabHash = typeof TAB_HASHES[number]
+
+function getTabIndexFromHash(hash: string): number {
+  const cleanHash = hash.replace('#', '') as TabHash
+  const index = TAB_HASHES.indexOf(cleanHash)
+  return index >= 0 ? index : 0
+}
+
 export default function CreatePage() {
   const [tabValue, setTabValue] = useState(0)
+  const [mounted, setMounted] = useState(false)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
+  // Handle hash on mount (hydration-safe)
+  useEffect(() => {
+    setMounted(true)
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const index = getTabIndexFromHash(window.location.hash)
+      setTabValue(index)
+    }
+  }, [])
+
+  // Update hash when tab changes
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue)
+    if (typeof window !== 'undefined') {
+      window.location.hash = TAB_HASHES[newValue]
+    }
   }
+
+  // Listen for hash changes (browser back/forward)
+  useEffect(() => {
+    if (!mounted) return
+
+    const handleHashChange = () => {
+      const index = getTabIndexFromHash(window.location.hash)
+      setTabValue(index)
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [mounted])
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 4 }}>
@@ -99,12 +138,16 @@ export default function CreatePage() {
             <AccordionDetails>
               <Typography variant="body1" color="text.secondary" paragraph>
                 Crow Create is a front-end design system helper that runs entirely in your browser.
-                Configure your design tokens across five sections:
+                Configure your design tokens across six sections:
               </Typography>
               <Box component="ul" sx={{ color: 'text.secondary', mt: 1 }}>
                 <li>
-                  <strong>Palette & Accessibility:</strong> Build color palettes, check WCAG contrast
-                  ratios, and simulate colorblind modes
+                  <strong>Palette:</strong> Build color palettes with primary, secondary, semantic, and
+                  neutral colors
+                </li>
+                <li>
+                  <strong>Accessibility:</strong> Check WCAG 2.2 and APCA contrast ratios for accessible
+                  color combinations
                 </li>
                 <li>
                   <strong>Typography:</strong> Select fonts, configure scales, and get intelligent
@@ -143,38 +186,45 @@ export default function CreatePage() {
             >
               <Tab
                 icon={<PaletteIcon />}
-                label="Palette & Accessibility"
+                label="Palette"
                 iconPosition="start"
                 id="create-tab-0"
                 aria-controls="create-tabpanel-0"
               />
               <Tab
-                icon={<TextFields />}
-                label="Typography"
+                icon={<AccessibilityIcon />}
+                label="Accessibility"
                 iconPosition="start"
                 id="create-tab-1"
                 aria-controls="create-tabpanel-1"
               />
               <Tab
-                icon={<ViewInAr />}
-                label="Layout & Style"
+                icon={<TextFields />}
+                label="Typography"
                 iconPosition="start"
                 id="create-tab-2"
                 aria-controls="create-tabpanel-2"
               />
               <Tab
-                icon={<Visibility />}
-                label="Preview"
+                icon={<ViewInAr />}
+                label="Layout & Style"
                 iconPosition="start"
                 id="create-tab-3"
                 aria-controls="create-tabpanel-3"
               />
               <Tab
-                icon={<Code />}
-                label="Exports"
+                icon={<Visibility />}
+                label="Preview"
                 iconPosition="start"
                 id="create-tab-4"
                 aria-controls="create-tabpanel-4"
+              />
+              <Tab
+                icon={<Code />}
+                label="Exports"
+                iconPosition="start"
+                id="create-tab-5"
+                aria-controls="create-tabpanel-5"
               />
             </Tabs>
           </Box>
@@ -184,15 +234,18 @@ export default function CreatePage() {
               <PaletteSection />
             </TabPanel>
             <TabPanel value={tabValue} index={1}>
-              <TypographySection />
+              <AccessibilitySection />
             </TabPanel>
             <TabPanel value={tabValue} index={2}>
-              <LayoutSection />
+              <TypographySection />
             </TabPanel>
             <TabPanel value={tabValue} index={3}>
-              <PreviewSection />
+              <LayoutSection />
             </TabPanel>
             <TabPanel value={tabValue} index={4}>
+              <PreviewSection />
+            </TabPanel>
+            <TabPanel value={tabValue} index={5}>
               <ExportsSection />
             </TabPanel>
           </Box>
