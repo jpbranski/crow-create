@@ -23,7 +23,6 @@ import {
   generateRandomPalette,
 } from '@/lib/colorUtils'
 import ColorPicker from './ColorPicker'
-import WCAGChecker from './WCAGChecker'
 
 export default function PaletteSection() {
   const { config, updatePalette } = useDesignSystem()
@@ -104,10 +103,10 @@ export default function PaletteSection() {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
         <Box>
           <Typography variant="h5" gutterBottom fontWeight={600}>
-            Color Palette & Accessibility
+            Color Palette
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Build your color palette and ensure it meets WCAG accessibility standards
+            Build your color palette with primary, secondary, semantic, and neutral colors
           </Typography>
         </Box>
         <Button
@@ -302,10 +301,6 @@ export default function PaletteSection() {
           </Paper>
         </Grid2>
 
-        {/* WCAG Contrast Checker */}
-        <Grid2 size={{ xs: 12 }}>
-          <WCAGChecker />
-        </Grid2>
       </Grid2>
     </Box>
   )
