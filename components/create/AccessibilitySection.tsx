@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import {
   Box,
   Typography,
@@ -23,42 +23,105 @@ import Grid2 from '@mui/material/Grid2'
 import { CheckCircle, Cancel, Warning, HelpOutline, Add } from '@mui/icons-material'
 import { useDesignSystem } from '@/context/DesignSystemContext'
 import {
-  getWcagContrast,
-  getWcagLevel,
-  getApcaContrast,
-  getApcaLevel,
-  formatApcaValue,
-  hexToRgb,
-} from '@/utils/contrast'
+  calculateWCAGContrast,
+  calculateAPCAContrast,
+  normalizeHex,
+  isValidHex,
+  formatLc,
+  formatRatio,
+  type WCAGResult,
+  type APCAResult,
+} from '@/utils/contrastCalc'
 
 type ContrastAlgorithm = 'wcag' | 'apca'
+type ColorMode = 'palette' | 'custom'
 
 export default function AccessibilitySection() {
   const { config } = useDesignSystem()
+
+  // Algorithm state
   const [algorithm, setAlgorithm] = useState<ContrastAlgorithm>('wcag')
 
-  // Foreground/text color state
-  const [foregroundType, setForegroundType] = useState<'palette' | 'custom'>('palette')
-  const [foregroundPalette, setForegroundPalette] = useState(config.palette.textPrimary)
+  // Foreground state
+  const [foregroundMode, setForegroundMode] = useState<ColorMode>('palette')
+  const [foregroundPalette, setForegroundPalette] = useState('textPrimary')
   const [foregroundCustom, setForegroundCustom] = useState('#000000')
 
-  // Background color state
-  const [backgroundType, setBackgroundType] = useState<'palette' | 'custom'>('palette')
-  const [backgroundPalette, setBackgroundPalette] = useState(config.palette.background)
+  // Background state
+  const [backgroundMode, setBackgroundMode] = useState<ColorMode>('palette')
+  const [backgroundPalette, setBackgroundPalette] = useState('background')
   const [backgroundCustom, setBackgroundCustom] = useState('#FFFFFF')
 
-  const foreground = foregroundType === 'palette' ? foregroundPalette : foregroundCustom
-  const background = backgroundType === 'palette' ? backgroundPalette : backgroundCustom
+  // Palette color options with actual hex values
+  const paletteColors = useMemo(
+    () => [
+      { key: 'primary', label: 'Primary', value: config.palette.primary },
+      { key: 'primaryDark', label: 'Primary Dark', value: config.palette.primaryDark },
+      { key: 'primaryLight', label: 'Primary Light', value: config.palette.primaryLight },
+      { key: 'secondary', label: 'Secondary', value: config.palette.secondary },
+      { key: 'secondaryDark', label: 'Secondary Dark', value: config.palette.secondaryDark },
+      { key: 'secondaryLight', label: 'Secondary Light', value: config.palette.secondaryLight },
+      { key: 'background', label: 'Background', value: config.palette.background },
+      { key: 'surface', label: 'Surface', value: config.palette.surface },
+      { key: 'textPrimary', label: 'Text Primary', value: config.palette.textPrimary },
+      { key: 'textSecondary', label: 'Text Secondary', value: config.palette.textSecondary },
+      { key: 'success', label: 'Success', value: config.palette.success },
+      { key: 'warning', label: 'Warning', value: config.palette.warning },
+      { key: 'error', label: 'Error', value: config.palette.error },
+      { key: 'info', label: 'Info', value: config.palette.info },
+    ],
+    [config.palette]
+  )
 
-  // Calculate contrast based on selected algorithm
-  const wcagRatio = getWcagContrast(foreground, background)
-  const apcaLc = getApcaContrast(foreground, background)
+  // Get actual foreground color (resolve from palette or use custom)
+  const foregroundColor = useMemo(() => {
+    if (foregroundMode === 'palette') {
+      const paletteColor = paletteColors.find((c) => c.key === foregroundPalette)
+      return paletteColor?.value || '#000000'
+    }
+    return normalizeHex(foregroundCustom)
+  }, [foregroundMode, foregroundPalette, foregroundCustom, paletteColors])
 
-  const normalLevel = getWcagLevel(wcagRatio, false)
-  const largeLevel = getWcagLevel(wcagRatio, true)
+  // Get actual background color (resolve from palette or use custom)
+  const backgroundColor = useMemo(() => {
+    if (backgroundMode === 'palette') {
+      const paletteColor = paletteColors.find((c) => c.key === backgroundPalette)
+      return paletteColor?.value || '#FFFFFF'
+    }
+    return normalizeHex(backgroundCustom)
+  }, [backgroundMode, backgroundPalette, backgroundCustom, paletteColors])
 
-  const apcaNormal = getApcaLevel(apcaLc, false)
-  const apcaLarge = getApcaLevel(apcaLc, true)
+  // Calculate WCAG contrast
+  const wcagResult: WCAGResult = useMemo(() => {
+    if (!isValidHex(foregroundColor) || !isValidHex(backgroundColor)) {
+      return {
+        ratio: 0,
+        level: { normal: 'Fail', large: 'Fail' },
+      }
+    }
+    return calculateWCAGContrast(foregroundColor, backgroundColor)
+  }, [foregroundColor, backgroundColor])
+
+  // Calculate APCA contrast
+  const apcaResult: APCAResult = useMemo(() => {
+    if (!isValidHex(foregroundColor) || !isValidHex(backgroundColor)) {
+      return {
+        lc: 0,
+        level: { normal: 'Fail', large: 'Fail' },
+      }
+    }
+    return calculateAPCAContrast(foregroundColor, backgroundColor)
+  }, [foregroundColor, backgroundColor])
+
+  // Debug logging (remove in production)
+  useEffect(() => {
+    console.log('Contrast Debug:', {
+      foreground: foregroundColor,
+      background: backgroundColor,
+      wcag: wcagResult,
+      apca: apcaResult,
+    })
+  }, [foregroundColor, backgroundColor, wcagResult, apcaResult])
 
   const getLevelIcon = (level: string) => {
     switch (level) {
@@ -84,26 +147,15 @@ export default function AccessibilitySection() {
     }
   }
 
-  const colorOptions = [
-    { label: 'Primary', value: config.palette.primary },
-    { label: 'Primary Dark', value: config.palette.primaryDark },
-    { label: 'Primary Light', value: config.palette.primaryLight },
-    { label: 'Secondary', value: config.palette.secondary },
-    { label: 'Secondary Dark', value: config.palette.secondaryDark },
-    { label: 'Secondary Light', value: config.palette.secondaryLight },
-    { label: 'Background', value: config.palette.background },
-    { label: 'Surface', value: config.palette.surface },
-    { label: 'Text Primary', value: config.palette.textPrimary },
-    { label: 'Text Secondary', value: config.palette.textSecondary },
-    { label: 'Success', value: config.palette.success },
-    { label: 'Warning', value: config.palette.warning },
-    { label: 'Error', value: config.palette.error },
-    { label: 'Info', value: config.palette.info },
-  ]
-
-  const normalizeHex = (val: string): string => {
-    const cleaned = val.replace(/^#+/, '')
-    return cleaned ? `#${cleaned}` : '#'
+  const handleCustomColorChange = (
+    value: string,
+    setter: (val: string) => void
+  ) => {
+    // Allow typing without # prefix
+    const cleaned = value.replace(/[^0-9A-Fa-f]/g, '')
+    if (cleaned.length <= 6) {
+      setter('#' + cleaned)
+    }
   }
 
   return (
@@ -165,9 +217,9 @@ export default function AccessibilitySection() {
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
               <ToggleButtonGroup
-                value={foregroundType}
+                value={foregroundMode}
                 exclusive
-                onChange={(_, value) => value && setForegroundType(value)}
+                onChange={(_, value) => value && setForegroundMode(value)}
                 size="small"
                 fullWidth
               >
@@ -176,7 +228,7 @@ export default function AccessibilitySection() {
               </ToggleButtonGroup>
             </Box>
 
-            {foregroundType === 'palette' ? (
+            {foregroundMode === 'palette' ? (
               <FormControl fullWidth>
                 <InputLabel>Select Color</InputLabel>
                 <Select
@@ -184,8 +236,8 @@ export default function AccessibilitySection() {
                   label="Select Color"
                   onChange={(e) => setForegroundPalette(e.target.value)}
                 >
-                  {colorOptions.map((option) => (
-                    <MenuItem key={option.label} value={option.value}>
+                  {paletteColors.map((option) => (
+                    <MenuItem key={option.key} value={option.key}>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <Box
                           sx={{
@@ -209,8 +261,10 @@ export default function AccessibilitySection() {
                   <Box
                     component="input"
                     type="color"
-                    value={foregroundCustom}
-                    onChange={(e) => setForegroundCustom((e.target as HTMLInputElement).value)}
+                    value={foregroundColor}
+                    onChange={(e) =>
+                      setForegroundCustom((e.target as HTMLInputElement).value)
+                    }
                     sx={{
                       width: 56,
                       height: 56,
@@ -224,12 +278,7 @@ export default function AccessibilitySection() {
                   <TextField
                     label="Hex Color"
                     value={foregroundCustom.replace('#', '')}
-                    onChange={(e) => {
-                      const val = e.target.value
-                      if (/^[0-9A-Fa-f]{0,6}$/.test(val) || val === '') {
-                        setForegroundCustom(normalizeHex(val))
-                      }
-                    }}
+                    onChange={(e) => handleCustomColorChange(e.target.value, setForegroundCustom)}
                     size="small"
                     fullWidth
                     InputProps={{
@@ -271,9 +320,9 @@ export default function AccessibilitySection() {
             </Typography>
             <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
               <ToggleButtonGroup
-                value={backgroundType}
+                value={backgroundMode}
                 exclusive
-                onChange={(_, value) => value && setBackgroundType(value)}
+                onChange={(_, value) => value && setBackgroundMode(value)}
                 size="small"
                 fullWidth
               >
@@ -282,7 +331,7 @@ export default function AccessibilitySection() {
               </ToggleButtonGroup>
             </Box>
 
-            {backgroundType === 'palette' ? (
+            {backgroundMode === 'palette' ? (
               <FormControl fullWidth>
                 <InputLabel>Select Color</InputLabel>
                 <Select
@@ -290,8 +339,8 @@ export default function AccessibilitySection() {
                   label="Select Color"
                   onChange={(e) => setBackgroundPalette(e.target.value)}
                 >
-                  {colorOptions.map((option) => (
-                    <MenuItem key={option.label} value={option.value}>
+                  {paletteColors.map((option) => (
+                    <MenuItem key={option.key} value={option.key}>
                       <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <Box
                           sx={{
@@ -315,8 +364,10 @@ export default function AccessibilitySection() {
                   <Box
                     component="input"
                     type="color"
-                    value={backgroundCustom}
-                    onChange={(e) => setBackgroundCustom((e.target as HTMLInputElement).value)}
+                    value={backgroundColor}
+                    onChange={(e) =>
+                      setBackgroundCustom((e.target as HTMLInputElement).value)
+                    }
                     sx={{
                       width: 56,
                       height: 56,
@@ -330,12 +381,7 @@ export default function AccessibilitySection() {
                   <TextField
                     label="Hex Color"
                     value={backgroundCustom.replace('#', '')}
-                    onChange={(e) => {
-                      const val = e.target.value
-                      if (/^[0-9A-Fa-f]{0,6}$/.test(val) || val === '') {
-                        setBackgroundCustom(normalizeHex(val))
-                      }
-                    }}
+                    onChange={(e) => handleCustomColorChange(e.target.value, setBackgroundCustom)}
                     size="small"
                     fullWidth
                     InputProps={{
@@ -375,18 +421,20 @@ export default function AccessibilitySection() {
             <Box
               sx={{
                 p: 4,
-                bgcolor: background,
-                color: foreground,
+                bgcolor: backgroundColor,
+                color: foregroundColor,
               }}
             >
-              <Typography variant="h5" sx={{ mb: 2 }}>
+              <Typography variant="h5" sx={{ mb: 2, color: foregroundColor }}>
                 Sample Heading Text
               </Typography>
-              <Typography variant="body1" sx={{ mb: 2 }}>
+              <Typography variant="body1" sx={{ mb: 2, color: foregroundColor }}>
                 This is sample body text to preview the contrast ratio between the selected
                 foreground and background colors. The quick brown fox jumps over the lazy dog.
               </Typography>
-              <Typography variant="h6">Large text sample for testing</Typography>
+              <Typography variant="h6" sx={{ color: foregroundColor }}>
+                Large text sample for testing
+              </Typography>
             </Box>
           </Paper>
         </Grid2>
@@ -449,7 +497,7 @@ export default function AccessibilitySection() {
                     </Tooltip>
                   </Box>
                   <Typography variant="h4" fontWeight={600}>
-                    {wcagRatio.toFixed(2)}:1
+                    {formatRatio(wcagResult.ratio)}
                   </Typography>
                 </Box>
 
@@ -459,9 +507,9 @@ export default function AccessibilitySection() {
                       Normal Text (16px)
                     </Typography>
                     <Chip
-                      icon={getLevelIcon(normalLevel)}
-                      label={normalLevel}
-                      color={getLevelColor(normalLevel)}
+                      icon={getLevelIcon(wcagResult.level.normal)}
+                      label={wcagResult.level.normal}
+                      color={getLevelColor(wcagResult.level.normal)}
                       size="small"
                     />
                   </Box>
@@ -470,9 +518,9 @@ export default function AccessibilitySection() {
                       Large Text (24px)
                     </Typography>
                     <Chip
-                      icon={getLevelIcon(largeLevel)}
-                      label={largeLevel}
-                      color={getLevelColor(largeLevel)}
+                      icon={getLevelIcon(wcagResult.level.large)}
+                      label={wcagResult.level.large}
+                      color={getLevelColor(wcagResult.level.large)}
                       size="small"
                     />
                   </Box>
@@ -512,9 +560,18 @@ export default function AccessibilitySection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             color="inherit"
-                            sx={{ display: 'block' }}
+                            sx={{ display: 'block', mb: 0.5 }}
                           >
                             → APCA Documentation
+                          </Link>
+                          <Link
+                            href="https://www.myndex.com/APCA/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            color="inherit"
+                            sx={{ display: 'block' }}
+                          >
+                            → APCA Calculator
                           </Link>
                         </Box>
                       }
@@ -526,7 +583,10 @@ export default function AccessibilitySection() {
                     </Tooltip>
                   </Box>
                   <Typography variant="h4" fontWeight={600}>
-                    {formatApcaValue(apcaLc)}
+                    {formatLc(apcaResult.lc)}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    {apcaResult.lc > 0 ? 'Dark text on light background' : 'Light text on dark background'}
                   </Typography>
                 </Box>
 
@@ -536,9 +596,9 @@ export default function AccessibilitySection() {
                       Body Text (Lc ≥ 60)
                     </Typography>
                     <Chip
-                      icon={getLevelIcon(apcaNormal.level)}
-                      label={apcaNormal.level}
-                      color={getLevelColor(apcaNormal.level)}
+                      icon={getLevelIcon(apcaResult.level.normal)}
+                      label={apcaResult.level.normal}
+                      color={getLevelColor(apcaResult.level.normal)}
                       size="small"
                     />
                   </Box>
@@ -547,9 +607,9 @@ export default function AccessibilitySection() {
                       Large Text/Headings (Lc ≥ 45)
                     </Typography>
                     <Chip
-                      icon={getLevelIcon(apcaLarge.level)}
-                      label={apcaLarge.level}
-                      color={getLevelColor(apcaLarge.level)}
+                      icon={getLevelIcon(apcaResult.level.large)}
+                      label={apcaResult.level.large}
+                      color={getLevelColor(apcaResult.level.large)}
                       size="small"
                     />
                   </Box>
